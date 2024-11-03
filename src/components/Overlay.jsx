@@ -33,20 +33,6 @@ export default function Overlay() {
           <Preloader2 />
         </OverlayElement>
 
-        <OverlayElement
-          key="intro-wrapper"
-          zIndex={999}
-          className="w-full h-screen overflow-hidden relative flex items-center justify-center  after:content-[''] after:absolute after:inset-0 after:size-full after:z-[9999]  after:bg-[url(/noise.png),radial-gradient(circle,#f9a13275_0%,_transparent_100%)] [background-size:_250px,_100%]"
-        >
-          <AnimatePresence>
-            {intro && (
-              <>
-                <Intro2 />
-              </>
-            )}
-          </AnimatePresence>
-        </OverlayElement>
-
         <OverlayElement zIndex={9999}>
           <AnimatedCursor />
         </OverlayElement>

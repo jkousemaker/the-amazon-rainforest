@@ -3,6 +3,7 @@ import "./globals.css";
 import LenisScroll from "@/components/LenisScroll";
 import { Poppins } from "next/font/google";
 import Overlay from "@/components/Overlay";
+import IntroWrapper from "@/components/IntroWrapper";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,7 +31,8 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className} antialiased`}>
         <LenisScroll>
           <Overlay />
-          <main className="flex relative z-0">{children}</main>
+          <IntroWrapper />
+          <main className="flex relative z-50">{children}</main>
         </LenisScroll>
       </body>
     </html>
