@@ -49,10 +49,9 @@ export default function Preloader2() {
           },
         }}
         transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 50,
-          mass: 2,
+          type: "tween",
+          duration: 1,
+          ease: [0.78, 0.15, 0.84, 0.67],
         }}
         className="absolute z-0 inset-0 bg-accent pointer-events-auto"
       ></motion.div>

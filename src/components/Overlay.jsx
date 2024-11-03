@@ -30,7 +30,7 @@ export default function Overlay() {
           zIndex={99999}
           className="overflow-hidden absolute inset-0 "
         >
-          <AnimatePresence>
+          <AnimatePresence mode="wait">
             {!introLoaded ? (
               <Preloader2 key="preloader" />
             ) : (
