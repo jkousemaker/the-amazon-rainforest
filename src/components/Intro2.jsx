@@ -22,7 +22,7 @@ function Row({ row, index, onImageLoad }) {
     <>
       {row.map((card, i) => {
         return (
-          <div
+          <motion.div
             key={card.id}
             className="relative size-full overflow-hidden rounded-xl"
           >
@@ -36,7 +36,7 @@ function Row({ row, index, onImageLoad }) {
               onLoad={() => onImageLoad(card.id)}
               className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
             />
-          </div>
+          </motion.div>
         );
       })}
     </>
