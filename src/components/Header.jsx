@@ -33,6 +33,7 @@ function useBoundedScroll(threshold) {
 }
 
 export default function Header() {
+  const { introLoaded } = useStore();
   const [scrolledPixels, setScrolledPixels] = useState(0);
   const [scrollDirection, setScrollDirection] = useState("up");
   let { scrollYBoundedProgress } = useBoundedScroll(400);
@@ -46,7 +47,6 @@ export default function Header() {
       <motion.header
         initial="initial"
         animate="animate"
-        exit="exit"
         className="relative w-full grid place-items-center  "
       >
         <motion.div
@@ -64,10 +64,6 @@ export default function Header() {
                 ease: [0.78, 0.15, 0.84, 0.67],
               },
             },
-            exit: {
-              y: "-100%",
-              opacity: 0,
-            },
           }}
           style={{
             translateY: useTransform(
@@ -78,11 +74,13 @@ export default function Header() {
           }}
           className="absolute bg-white/5 backdrop-blur-lg backdrop-saturate-50 backdrop-contrast-150 backdrop-brightness-125 shadow-lg inset-0"
         ></motion.div>
-        <div className="relative h-20 w-20">
-          <LogoContainer
-            scrollYBoundedProgressDelayed={scrollYBoundedProgressDelayed}
-          />
-        </div>
+        {introLoaded && (
+          <div className="relative h-20 w-20">
+            <LogoContainer
+              scrollYBoundedProgressDelayed={scrollYBoundedProgressDelayed}
+            />
+          </div>
+        )}
       </motion.header>
     </div>
   );
@@ -91,6 +89,8 @@ export default function Header() {
 function LogoContainer({ scrollYBoundedProgressDelayed }) {
   return (
     <motion.div
+      key="test100"
+      layout
       layoutId="layout-page-logo"
       transition={{
         layout: {
@@ -100,7 +100,8 @@ function LogoContainer({ scrollYBoundedProgressDelayed }) {
         },
       }}
       style={{
-        scale: useTransform(scrollYBoundedProgressDelayed, [0, 1], [1, 0.8]),
+        width: "5rem",
+        height: "5rem",
       }}
       className="relative z-50 w-full h-full pointer-events-auto !origin-top"
     >

@@ -25,19 +25,15 @@ export default function Overlay() {
   return (
     <>
       <div className="fixed inset-0 size-full  z-[9999] flex pointer-events-none">
-        <OverlayElement
-          key="preloader-wrapper"
-          zIndex={99999}
-          className="overflow-hidden absolute inset-0 "
-        >
-          <AnimatePresence mode="wait">
-            {!introLoaded ? (
-              <Preloader2 key="preloader" />
-            ) : (
-              <Header key="header" />
-            )}
-          </AnimatePresence>
-        </OverlayElement>
+        <AnimatePresence>
+          <OverlayElement
+            key="preloader-wrapper"
+            zIndex={99999}
+            className="overflow-hidden absolute inset-0 "
+          >
+            <Preloader2 />
+          </OverlayElement>
+        </AnimatePresence>
         <OverlayElement
           key="intro-wrapper"
           zIndex={999}
