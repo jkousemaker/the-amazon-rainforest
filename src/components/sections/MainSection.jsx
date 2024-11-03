@@ -25,8 +25,8 @@ export default function MainSection() {
             layoutId="hero-layout-image"
             className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
             transition={{
-              duration: 2,
-              ease: [0.44, 0.2, 0.13, 0.92],
+              duration: 1.2,
+              ease: [0.84, 0.01, 0.6, 0.9],
             }}
           />
         )}

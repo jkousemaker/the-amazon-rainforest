@@ -17,14 +17,41 @@ import { cn } from "@/lib/cn";
 const MotionImage = motion.create(Image);
 import { introImages } from "@/data/introImages";
 
-function Row({ row, index, onImageLoad, hoveredCard, setHoveredCard }) {
+function Row({ row, index, onImageLoad }) {
+  const mousePosition = useMousePosition();
+  const screenSize = useScreenSize();
+  const numRows = introImages.length;
+  const middleRowIndex = Math.floor(numRows / 2);
+  const middleRow = introImages[middleRowIndex];
+  const distanceFromMiddle = Math.abs(index - middleRowIndex);
+  const translateXVal = useTransform(
+    mousePosition.x,
+    [0, screenSize.width],
+    [-screenSize.width / 3, screenSize.width / 3]
+  );
+
+  const translateX = useSpring(translateXVal, {
+    stiffness: row === middleRow ? 250 : 300,
+    damping: row === middleRow ? 30 : 50,
+  });
+
   return (
     <>
-      {row.map((card, i) => {
-        return (
-          <Card key={card.id} card={card} index={i} onImageLoad={onImageLoad} />
-        );
-      })}
+      <motion.div
+        style={{ translateX }}
+        className="hover:z-50 relative grid gap-4 grid-cols-[repeat(7,1fr)] will-change-[transform,filter] size-full"
+      >
+        {row.map((card, i) => {
+          return (
+            <Card
+              key={card.id}
+              card={card}
+              index={i}
+              onImageLoad={onImageLoad}
+            />
+          );
+        })}
+      </motion.div>
     </>
   );
 }
@@ -60,7 +87,6 @@ function Card({ card, index, onImageLoad }) {
 export default function Intro() {
   const [loadedImages, setLoadedImages] = useState(new Set());
   const { setIntroLoaded, setIntro } = useStore();
-  const [hoveredCard, setHoveredCard] = useState(null);
   // Calculate total number of images
   const totalImages = introImages.reduce((total, row) => total + row.length, 0);
 
@@ -87,18 +113,7 @@ export default function Intro() {
       <motion.div className=" grid pointer-events-auto bg-black gap-4 flex-none relative w-[200vw] h-[200vh] grid-rows-[repeat(5,1fr)] grid-cols-[100%] origin-[center_center] ">
         {introImages.map((row, i) => {
           return (
-            <motion.div
-              key={i}
-              className="hover:z-50 relative grid gap-4 grid-cols-[repeat(7,1fr)] will-change-[transform,filter] size-full"
-            >
-              <Row
-                row={row}
-                index={i}
-                onImageLoad={handleImageLoad}
-                hoveredCard={hoveredCard}
-                setHoveredCard={setHoveredCard}
-              />
-            </motion.div>
+            <Row key={i} row={row} index={i} onImageLoad={handleImageLoad} />
           );
         })}
       </motion.div>
