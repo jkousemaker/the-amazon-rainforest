@@ -15,8 +15,8 @@ export default function ScrollSection() {
   });
 
   return (
-    <section ref={ref} className="h-[300vh]">
-      <div className="h-screen sticky top-0 grid place-items-center">
+    <section ref={ref} className="h-[300vh] ">
+      <div className="h-screen sticky top-0 grid place-items-center overflow-hidden">
         <Slider scrollYProgress={scrollYProgress} />
         <Header scrollYProgress={scrollYProgress} />
       </div>

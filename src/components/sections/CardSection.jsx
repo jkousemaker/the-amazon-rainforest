@@ -57,7 +57,7 @@ const cards = [
 ];
 export default function CardSection() {
   return (
-    <section>
+    <section className="w-full">
       <MiddleCards />
       <SlideCards />
     </section>

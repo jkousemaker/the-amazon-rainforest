@@ -12,12 +12,18 @@ export default function Preloader2() {
       animate={introLoaded ? "closed" : "open"}
       className="fixed z-[999] inset-0 pointer-events-none grid place-items-center"
     >
-      <header className="absolute z-50 top-0 left-0 w-full grid place-items-center">
-        {introLoaded && (
-          <motion.div className="relative h-20 w-20">
-            <LogoContainer />
-          </motion.div>
-        )}
+      <header className="absolute z-50 top-0 left-0 w-full grid place-items-center pt-2">
+        <motion.div
+          layout
+          className="bg-white"
+          style={{ borderRadius: "999px" }}
+        >
+          {introLoaded && (
+            <motion.div className="relative h-20 w-20">
+              <LogoContainer />
+            </motion.div>
+          )}
+        </motion.div>
       </header>
       {!introLoaded && (
         <div className="size-60 md:size-[18rem]">
@@ -49,7 +55,7 @@ export default function Preloader2() {
           duration: 1,
           ease: [0.78, 0.15, 0.84, 0.67],
         }}
-        className="absolute z-0 inset-0 bg-accent pointer-events-auto"
+        className="absolute z-0 inset-0 bg-slate-950 pointer-events-auto"
       ></motion.div>
     </motion.div>
   );

@@ -16,7 +16,7 @@ export default function ScrollTop() {
   const lenis = useLenis();
   const scrollToTop = () => {
     // You can use either of these methods
-    lenis?.scrollTo(0, { duration: 1.5 }); // 1.5 seconds duration
+    lenis?.scrollTo(0, { lerp: 0.1 }); // 1.5 seconds duration
   };
   return (
     <>
@@ -51,9 +51,22 @@ export default function ScrollTop() {
       </motion.button>
       <AnimatePresence>
         <ScrollIndicator />
+        <ScrollProgress />
       </AnimatePresence>
       ;
     </>
+  );
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  return (
+    <div className="absolute w-full top-0 left-0">
+      <motion.div
+        style={{ scaleX: scrollYProgress }}
+        className="w-full h-1 bg-blue-400 origin-left"
+      />
+    </div>
   );
 }
 
@@ -63,10 +76,10 @@ function ScrollIndicator() {
       <motion.p className="text-2xl flex relative bg-blend-difference">
         SCROLL DOWN
         <motion.span
-          initial={{ x: "200%", y: "-120%", rotate: 0 }}
-          animate={{ x: "170%", y: "-80%", rotate: [null, 45, -15] }}
+          initial={{ x: "110%", y: "-60%", rotate: 0 }}
+          animate={{ x: "100%", y: "-30%", rotate: [null, 5, -5] }}
           transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }}
-          className="absolute top-0 right-0 translate-x-full -translate-y-full rotate-12 bg-blend-difference text-white shadow-xl"
+          className="absolute top-0 right-0 translate-x-0 -translate-y-full rotate-12  text-black "
         >
           <Mouse size={40} />
         </motion.span>

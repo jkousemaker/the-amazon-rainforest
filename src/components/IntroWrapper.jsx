@@ -7,7 +7,7 @@ import { useStore } from "@/store";
 export default function IntroWrapper() {
   const { intro, setIntro, introLoaded } = useStore();
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence>
       {intro && (
         <OverlayElement
           key="intro-wrapper"

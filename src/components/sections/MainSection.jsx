@@ -34,7 +34,7 @@ export default function MainSection() {
         <motion.div
           layoutId="intro-img"
           initial={{ opacity: 0 }}
-          animate={{ opacity: variant == "continue" ? 1 : 0 }}
+          animate={{ opacity: loaded ? 1 : 0 }}
           transition={{
             duration: 0.5,
             delay: 0,
@@ -45,29 +45,10 @@ export default function MainSection() {
         </motion.div>
         <div className="z-50 top-0 left-0 w-full absolute h-full flex justify-center items-center">
           <motion.div
-            variants={{
-              initial: {
-                scale: 2,
-                y: "200%",
-              },
-              animate: {
-                scale: 1.3,
-                y: 0,
-              },
-              continue: {
-                scale: 1,
-                y: 0,
-              },
-            }}
-            initial="initial"
-            animate={loaded ? variant : "initial"}
             transition={{
               duration: 1.5,
 
               ease: [0.22, 0.61, 0.36, 1],
-            }}
-            onAnimationComplete={(definition) => {
-              setVariant("continue");
             }}
             className="absolute z-20 "
           >

@@ -11,7 +11,10 @@ export default function SloganSection() {
     offset: ["start 0.9", "start 0.25"],
   });
   return (
-    <section ref={container} className="h-screen grid place-items-center">
+    <section
+      ref={container}
+      className="h-screen grid place-items-center bg-black text-white"
+    >
       <Paragraph
         paragraph={
           "Enter the world of the Amazon Rainforest, a world where you can freely explore the most amazing species that exist in the wonders of the forest."
