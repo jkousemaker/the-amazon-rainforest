@@ -117,6 +117,7 @@ function MiddleCard({ card, scrollYProgress, index }) {
         priority
         src="/hero.jpg"
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         alt={`Picture of a ${card.label}`}
         className=" object-cover [background-position:_50%_50%] relative"
       />
@@ -186,6 +187,7 @@ function SlideCard({ amount, card, scrollYProgress, index }) {
         priority
         src="/hero.jpg"
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         alt={`Picture of a ${card.label}`}
         className=" object-cover [background-position:_50%_50%] relative"
       />

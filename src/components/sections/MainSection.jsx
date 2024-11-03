@@ -12,16 +12,16 @@ export default function MainSection() {
   const [variant, setVariant] = useState("animate");
   const { loaded, intro } = useStore();
   const scale = useMotionValue(2);
-  const MotionImage = motion(Image);
+  const MotionImage = motion.create(Image);
   return (
     <section className="h-screen relative">
-      <motion.div className="h-screen sticky top-0 ">
+      <motion.div className="absolute inset-0 ">
         {!intro && (
           <MotionImage
             src="/hero.jpg"
             fill
             alt="dev"
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             layoutId="hero-layout-image"
             className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
             transition={{

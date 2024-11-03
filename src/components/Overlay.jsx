@@ -25,19 +25,18 @@ export default function Overlay() {
   return (
     <>
       <div className="fixed inset-0 size-full  z-[9999] flex pointer-events-none">
-        <AnimatePresence>
-          <OverlayElement
-            key="preloader-wrapper"
-            zIndex={99999}
-            className="overflow-hidden absolute inset-0 "
-          >
-            <Preloader2 />
-          </OverlayElement>
-        </AnimatePresence>
+        <OverlayElement
+          key="preloader-wrapper"
+          zIndex={99999}
+          className="overflow-hidden absolute inset-0 size-full"
+        >
+          <Preloader2 />
+        </OverlayElement>
+
         <OverlayElement
           key="intro-wrapper"
           zIndex={999}
-          className="w-full h-screen overflow-hidden relative flex items-center justify-center  after:content-[''] after:absolute after:inset-0 after:size-full  after:bg-[url(/noise.png),radial-gradient(circle,#f9a13275_0%,_transparent_100%)] [background-size:_250px,_100%]"
+          className="w-full h-screen overflow-hidden relative flex items-center justify-center  after:content-[''] after:absolute after:inset-0 after:size-full after:z-[9999]  after:bg-[url(/noise.png),radial-gradient(circle,#f9a13275_0%,_transparent_100%)] [background-size:_250px,_100%]"
         >
           {intro && (
             <>
