@@ -59,8 +59,9 @@ export default function Header() {
               y: 0,
               opacity: 1,
               transition: {
-                delay: 2.05,
-                duration: 0.3,
+                type: "tween",
+                duration: 1,
+                ease: [0.78, 0.15, 0.84, 0.67],
               },
             },
             exit: {
