@@ -1,12 +1,7 @@
-import Preloader from "@/components/Preloader";
 import localFont from "next/font/local";
 import "./globals.css";
-import ScrollTop from "@/components/ScrollTop";
 import LenisScroll from "@/components/LenisScroll";
 import { Poppins } from "next/font/google";
-import AnimatedCursor from "@/components/AnimatedCursor";
-
-import LayoutAnimation from "@/components/LayoutAnimation";
 import Overlay from "@/components/Overlay";
 
 const poppins = Poppins({

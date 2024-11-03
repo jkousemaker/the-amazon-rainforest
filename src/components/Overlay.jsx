@@ -4,11 +4,10 @@ import Preloader from "@/components/Preloader";
 import ScrollTop from "@/components/ScrollTop";
 import Intro2 from "./Intro2";
 import { cn } from "@/lib/cn";
-import { AnimatePresence, motion } from "framer-motion";
-import LayoutAnimation from "./LayoutAnimation";
+import { AnimatePresence } from "framer-motion";
+
 import { useStore } from "@/store";
-import MainPicture from "./MainImage";
-import Image from "next/image";
+
 import Preloader2 from "./Preloader2";
 import Header from "./Header";
 export default function Overlay() {
