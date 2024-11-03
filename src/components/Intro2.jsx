@@ -84,7 +84,7 @@ function Card({ card, index, onImageLoad }) {
   );
 }
 
-export default function Intro() {
+export default function Intro2() {
   const [loadedImages, setLoadedImages] = useState(new Set());
   const { setIntroLoaded, setIntro } = useStore();
   // Calculate total number of images
