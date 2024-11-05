@@ -99,6 +99,56 @@ function Card({ card, index, onImageLoad, hasLoaded }) {
     </motion.div>
   );
 }
+/* 
+--to fix layoutId bug--
+1. Remove conditional render & AnimatePresence in IntroWrapper.jsx
+2. Unmount Intro by setting store state in onLayoutAnimationComplete event
+
+function Card({ card, index, onImageLoad, hasLoaded }) {
+  const { intro } = useStore();
+  const max = 10;
+  const min = 1;
+  const rand = Math.floor(Math.random() * (max - min + 1) + min);
+  const delay = rand / 10;
+  const isHero = card.layoutId === "hero-layout-image";
+  const isRendered = !intro && isHero;
+
+  console.log(isRendered, card.layoutId);
+  return (
+    <motion.div
+      variants={{
+        initial: {
+          scale: 0,
+        },
+        animate: {
+          scale: 1,
+        },
+      }}
+      initial="initial"
+      animate={hasLoaded ? "animate" : "initial"}
+      transition={{
+        duration: 1,
+        delay: 0.4 + delay,
+        ease: [0, 0.25, 0, 0.99],
+      }}
+      className="relative size-full overflow-hidden rounded-xl"
+    >
+      {!isRendered && (
+        <MotionImage
+          priority
+          src={card.img}
+          fill
+          alt="dev"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          layoutId={card.layoutId}
+          onLoad={() => onImageLoad(card.id)}
+          className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
+        />
+      )}
+    </motion.div>
+  );
+}
+*/
 
 export default function Intro2() {
   const [loadedImages, setLoadedImages] = useState(new Set());
