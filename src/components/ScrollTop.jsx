@@ -1,5 +1,6 @@
 "use client";
 import { useLenis } from "@studio-freight/react-lenis";
+
 import {
   useScroll,
   useMotionValueEvent,
@@ -84,8 +85,10 @@ function ScrollIndicator() {
   return (
     <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold mb-5">
       <TextShimmer
-        duration={2}
-        spread={4}
+        duration={3}
+        spread={10}
+        initialPosition={120}
+        animatePosition={-20}
         className="text-2xl flex relative [--base-color:theme(colors.black)] [--base-gradient-color:theme(colors.blue.200)]"
       >
         SCROLL DOWN

@@ -10,7 +10,6 @@ import { useStore } from "@/store";
 
 import Preloader2 from "./Preloader2";
 export default function Overlay() {
-  const { intro, loaded, setIntro, introLoaded } = useStore();
   const elements = [
     {
       file: AnimatedCursor,
@@ -36,11 +35,9 @@ export default function Overlay() {
           <AnimatedCursor />
         </OverlayElement>
 
-        {!intro && (
-          <OverlayElement zIndex={10}>
-            <ScrollTop />
-          </OverlayElement>
-        )}
+        <OverlayElement zIndex={10}>
+          <ScrollTop />
+        </OverlayElement>
       </div>
     </>
   );

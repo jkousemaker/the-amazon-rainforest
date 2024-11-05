@@ -84,7 +84,7 @@ function Card({ card, index, onImageLoad, hasLoaded }) {
         delay: 0.4 + delay,
         ease: [0, 0.25, 0, 0.99],
       }}
-      className="relative size-full overflow-hidden rounded-xl hover:z-[99999999999]"
+      className="relative size-full overflow-hidden rounded-xl"
     >
       <MotionImage
         priority
@@ -103,6 +103,7 @@ function Card({ card, index, onImageLoad, hasLoaded }) {
 --to fix layoutId bug--
 1. Remove conditional render & AnimatePresence in IntroWrapper.jsx
 2. Unmount Intro by setting store state in onLayoutAnimationComplete event
+3. Put Explore button in Intro2.jsx inside of overlay so the hero layout doesnt clip over it then animate it nicely
 
 function Card({ card, index, onImageLoad, hasLoaded }) {
   const { intro } = useStore();

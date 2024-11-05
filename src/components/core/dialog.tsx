@@ -20,6 +20,7 @@ import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 import useClickOutside from "@/hooks/useClickOutside";
 import { XIcon } from "lucide-react";
+import { useLenis } from "@studio-freight/react-lenis";
 
 interface DialogContextType {
   isOpen: boolean;
@@ -133,7 +134,7 @@ function DialogContent({ children, className, style }: DialogContent) {
     useState<HTMLElement | null>(null);
   const [lastFocusableElement, setLastFocusableElement] =
     useState<HTMLElement | null>(null);
-
+  const lenis = useLenis();
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -165,6 +166,7 @@ function DialogContent({ children, className, style }: DialogContent) {
 
   useEffect(() => {
     if (isOpen) {
+      lenis?.stop();
       document.body.classList.add("overflow-hidden");
       const focusableElements = containerRef.current?.querySelectorAll(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -177,6 +179,7 @@ function DialogContent({ children, className, style }: DialogContent) {
         (focusableElements[0] as HTMLElement).focus();
       }
     } else {
+      lenis?.start();
       document.body.classList.remove("overflow-hidden");
       triggerRef.current?.focus();
     }
@@ -227,12 +230,12 @@ function DialogContainer({ children }: DialogContainerProps) {
         <>
           <motion.div
             key={`backdrop-${uniqueId}`}
-            className="fixed inset-0 h-full w-full bg-white/40 backdrop-blur-sm dark:bg-black/40"
+            className="fixed inset-0 z-[99999] h-full w-full backdrop-blur-sm bg-black/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           />
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="fixed inset-0 z-[999999] flex items-center justify-center">
             {children}
           </div>
         </>

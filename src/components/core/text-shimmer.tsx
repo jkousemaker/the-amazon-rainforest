@@ -9,6 +9,8 @@ interface TextShimmerProps {
   className?: string;
   duration?: number;
   spread?: number;
+  initialPosition?: number;
+  animatePosition?: number;
 }
 
 export function TextShimmer({
@@ -17,6 +19,8 @@ export function TextShimmer({
   className,
   duration = 2,
   spread = 2,
+  initialPosition = 100,
+  animatePosition = 0,
 }: TextShimmerProps) {
   const MotionComponent = motion.create(
     Component as keyof JSX.IntrinsicElements
@@ -35,8 +39,8 @@ export function TextShimmer({
         "dark:[--base-color:#71717a] dark:[--base-gradient-color:#ffffff] dark:[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--base-gradient-color),#0000_calc(50%+var(--spread)))]",
         className
       )}
-      initial={{ backgroundPosition: "100% center" }}
-      animate={{ backgroundPosition: "0% center" }}
+      initial={{ backgroundPosition: `${initialPosition}% center` }}
+      animate={{ backgroundPosition: `${animatePosition}% center` }}
       transition={{
         repeat: Infinity,
         duration,
