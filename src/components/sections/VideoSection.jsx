@@ -22,15 +22,15 @@ export default function VideoSection() {
   const black = useTransform(scrollYProgress, [0, 0.6, 1], [200, 100, 0]);
   const maskImage = useMotionTemplate`linear-gradient(to bottom, transparent ${transparent}%, black ${black}%)`;
   const blur = useTransform(scrollYProgress, [0.5, 1], [20, 0]);
-  const brightness = useTransform(scrollYProgress, [0.5, 1], [0.5, 1]);
-  const saturate = useTransform(scrollYProgress, [0.5, 1], [2.5, 1]);
+  const brightness = useTransform(scrollYProgress, [0.7, 1], [0.5, 1]);
+  const saturate = useTransform(scrollYProgress, [0.7, 1], [2.5, 1]);
   const filter = useMotionTemplate`blur(${blur}px) brightness(${brightness}) saturate(${saturate})`;
 
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.8, 1.5, 1]);
   return (
     <section
       ref={container}
-      className="h-screen relative z-50 grid place-items-center bg-black text-white"
+      className="h-screen relative z-50  bg-black text-white mb-"
     >
       <motion.div
         className="relative size-full"
