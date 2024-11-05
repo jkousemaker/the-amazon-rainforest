@@ -9,9 +9,8 @@ import { AnimatePresence } from "framer-motion";
 import { useStore } from "@/store";
 
 import Preloader2 from "./Preloader2";
-import Header from "./Header";
 export default function Overlay() {
-  const { intro, setIntro, introLoaded } = useStore();
+  const { intro, loaded, setIntro, introLoaded } = useStore();
   const elements = [
     {
       file: AnimatedCursor,
@@ -37,9 +36,11 @@ export default function Overlay() {
           <AnimatedCursor />
         </OverlayElement>
 
-        <OverlayElement zIndex={10}>
-          <ScrollTop />
-        </OverlayElement>
+        {!intro && (
+          <OverlayElement zIndex={10}>
+            <ScrollTop />
+          </OverlayElement>
+        )}
       </div>
     </>
   );

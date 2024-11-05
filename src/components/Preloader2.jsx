@@ -15,7 +15,7 @@ export default function Preloader2() {
       <header className="absolute z-50 top-0 left-0 w-full grid place-items-center pt-2">
         <motion.div
           layout
-          className="bg-white"
+          className="bg-white px-2"
           style={{ borderRadius: "999px" }}
         >
           {introLoaded && (

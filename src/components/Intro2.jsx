@@ -17,22 +17,26 @@ import { cn } from "@/lib/cn";
 const MotionImage = motion.create(Image);
 import { introImages } from "@/data/introImages";
 
-function Row({ row, index, onImageLoad }) {
+function Row({ row, index, onImageLoad, hasLoaded }) {
   const mousePosition = useMousePosition();
   const screenSize = useScreenSize();
   const numRows = introImages.length;
   const middleRowIndex = Math.floor(numRows / 2);
   const middleRow = introImages[middleRowIndex];
   const distanceFromMiddle = Math.abs(index - middleRowIndex);
+
   const translateXVal = useTransform(
     mousePosition.x,
     [0, screenSize.width],
-    [-screenSize.width / 3, screenSize.width / 3]
+    [
+      row === middleRow ? -screenSize.width / 2.5 : -screenSize.width / 3,
+      row === middleRow ? screenSize.width / 2.5 : screenSize.width / 3,
+    ]
   );
 
   const translateX = useSpring(translateXVal, {
-    stiffness: row === middleRow ? 250 : 300,
-    damping: row === middleRow ? 30 : 50,
+    stiffness: row === middleRow ? 150 : 300,
+    damping: row === middleRow ? 30 : 40,
   });
 
   return (
@@ -48,6 +52,7 @@ function Row({ row, index, onImageLoad }) {
               card={card}
               index={i}
               onImageLoad={onImageLoad}
+              hasLoaded={hasLoaded}
             />
           );
         })}
@@ -56,19 +61,30 @@ function Row({ row, index, onImageLoad }) {
   );
 }
 
-function Card({ card, index, onImageLoad }) {
-  const scale = useSpring(1);
+function Card({ card, index, onImageLoad, hasLoaded }) {
+  const max = 10;
+  const min = 1;
+  const rand = Math.floor(Math.random() * (max - min + 1) + min);
+  const delay = rand / 10;
+
   return (
     <motion.div
-      onPointerEnter={(e) => {
-        scale.set(1.05);
+      variants={{
+        initial: {
+          scale: 0,
+        },
+        animate: {
+          scale: 1,
+        },
       }}
-      onPointerLeave={(e) => {
-        scale.set(1);
+      initial="initial"
+      animate={hasLoaded ? "animate" : "initial"}
+      transition={{
+        duration: 1,
+        delay: 0.4 + delay,
+        ease: [0, 0.25, 0, 0.99],
       }}
-      key={card.id}
       className="relative size-full overflow-hidden rounded-xl hover:z-[99999999999]"
-      style={{ scale }}
     >
       <MotionImage
         priority
@@ -86,7 +102,7 @@ function Card({ card, index, onImageLoad }) {
 
 export default function Intro2() {
   const [loadedImages, setLoadedImages] = useState(new Set());
-  const { setIntroLoaded, setIntro } = useStore();
+  const { introLoaded, setIntroLoaded, setIntro } = useStore();
   // Calculate total number of images
   const totalImages = introImages.reduce((total, row) => total + row.length, 0);
 
@@ -113,7 +129,13 @@ export default function Intro2() {
       <motion.div className=" grid pointer-events-auto bg-black gap-4 flex-none relative w-[200vw] h-[200vh] grid-rows-[repeat(5,1fr)] grid-cols-[100%] origin-[center_center] ">
         {introImages.map((row, i) => {
           return (
-            <Row key={i} row={row} index={i} onImageLoad={handleImageLoad} />
+            <Row
+              key={`img-${i}-${row.id}`}
+              row={row}
+              index={i}
+              onImageLoad={handleImageLoad}
+              hasLoaded={introLoaded}
+            />
           );
         })}
       </motion.div>

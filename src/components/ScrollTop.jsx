@@ -10,6 +10,8 @@ import {
 } from "framer-motion";
 import { ChevronUp, Mouse } from "lucide-react";
 import { useStore } from "@/store";
+import { TextShimmer } from "@/components/core/text-shimmer";
+
 export default function ScrollTop() {
   const { scrollYProgress } = useScroll();
 
@@ -19,10 +21,20 @@ export default function ScrollTop() {
     lenis?.scrollTo(0, { lerp: 0.1 }); // 1.5 seconds duration
   };
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        delay: 1.5,
+        duration: 0.5,
+      }}
+    >
       <motion.button
         onClick={scrollToTop}
-        whileHover={{ scale: 1.2 }}
         className="absolute bottom-0 right-0 m-5 pointer-events-auto bg-white size-14 rounded-full"
       >
         <span className="size-full absolute inset-0">
@@ -49,12 +61,10 @@ export default function ScrollTop() {
           <ChevronUp size={40} />
         </span>
       </motion.button>
-      <AnimatePresence>
-        <ScrollIndicator />
-        <ScrollProgress />
-      </AnimatePresence>
-      ;
-    </>
+
+      <ScrollIndicator />
+      <ScrollProgress />
+    </motion.div>
   );
 }
 
@@ -72,18 +82,14 @@ function ScrollProgress() {
 
 function ScrollIndicator() {
   return (
-    <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold">
-      <motion.p className="text-2xl flex relative bg-blend-difference">
+    <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold mb-5">
+      <TextShimmer
+        duration={2}
+        spread={4}
+        className="text-2xl flex relative [--base-color:theme(colors.black)] [--base-gradient-color:theme(colors.blue.200)]"
+      >
         SCROLL DOWN
-        <motion.span
-          initial={{ x: "110%", y: "-60%", rotate: 0 }}
-          animate={{ x: "100%", y: "-30%", rotate: [null, 5, -5] }}
-          transition={{ duration: 1, repeat: Infinity, repeatType: "mirror" }}
-          className="absolute top-0 right-0 translate-x-0 -translate-y-full rotate-12  text-black "
-        >
-          <Mouse size={40} />
-        </motion.span>
-      </motion.p>
+      </TextShimmer>
     </div>
   );
 }

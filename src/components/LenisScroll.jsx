@@ -10,7 +10,7 @@ export default function LenisScroll({ children }) {
     <ReactLenis
       root
       options={{
-        lerp: 0.05,
+        lerp: 0.1,
       }}
     >
       {children}
