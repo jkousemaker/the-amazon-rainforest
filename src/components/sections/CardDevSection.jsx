@@ -11,15 +11,60 @@ import {
   DialogContainer,
 } from "@/components/core/dialog";
 
+const cards = [
+  {
+    id: 0,
+    label: "Mammals",
+    description: "Mammals are very cool and they live on mud.",
+    img: "/hero.jpg",
+    animals: [
+      {
+        id: 0,
+        label: "Orangutan",
+        description: "Orangutan is a smart monkey",
+        img: "/2.jpg",
+      },
+      {
+        id: 1,
+        label: "Chimp",
+        description: "Chimp is a smart monkey",
+        img: "/3.jpg",
+      },
+    ],
+  },
+  {
+    id: 1,
+    label: "Plants",
+    description: "Plants are very cool and they live on mud.",
+    img: "/4.jpg",
+    animals: [
+      {
+        id: 0,
+        label: "Flower1",
+        description: "Flower1 is a smart monkey",
+        img: "/5.jpg",
+      },
+      {
+        id: 1,
+        label: "Flower2",
+        description: "Flower2 is a smart monkey",
+        img: "/6.jpg",
+      },
+    ],
+  },
+];
+
 export default function CardDevSection() {
   return (
-    <section className="h-screen relative z-20 bg-black grid place-items-center">
-      <DialogBasicImage />
+    <section className="h-screen relative z-20 bg-black flex flex-row justify-center items-center gap-5">
+      {cards.map((card, i) => {
+        return <DialogBasicOne key={i} card={card} index={i} />;
+      })}
     </section>
   );
 }
 
-function DialogBasicImage() {
+function DialogBasicImage({ card, index }) {
   return (
     <Dialog
       transition={{
@@ -28,17 +73,17 @@ function DialogBasicImage() {
         duration: 1,
       }}
     >
-      <DialogTrigger>
+      <DialogTrigger className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900">
         <DialogImage
-          src="/hero.jpg"
+          src={card.img}
           alt="Sony Style Store in the Sony Center complex - Berlin, Germany (2000)"
-          className="max-w-xs rounded-[4px]"
+          className="h-48 w-full object-cover"
         />
       </DialogTrigger>
       <DialogContainer>
         <DialogContent className="relative">
           <DialogImage
-            src="/hero.jpg"
+            src={card.img}
             alt="Sony Style Store in the Sony Center complex - Berlin, Germany (2000)"
             className="h-auto w-screen object-cover"
           />
@@ -61,7 +106,7 @@ function DialogBasicImage() {
   );
 }
 
-function DialogBasicOne() {
+function DialogBasicOne({ card, index }) {
   return (
     <Dialog
       transition={{
@@ -77,7 +122,7 @@ function DialogBasicOne() {
         className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
       >
         <DialogImage
-          src="/hero.jpg"
+          src={card.img}
           alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
           className="h-48 w-full object-cover"
         />
@@ -107,7 +152,7 @@ function DialogBasicOne() {
           className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]"
         >
           <DialogImage
-            src="/hero.jpg"
+            src={card.img}
             alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
             className="h-full w-full"
           />
