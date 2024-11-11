@@ -41,13 +41,14 @@ export const GooeyButton = ({ children, ...props }) => {
                   },
                   animate: {
                     y: 0,
-
-                    transition: {
-                      delay: 1 + i * 0.1,
-                      duration: 0.5,
-                      ease: [0.35, 0.39, 0, 0.86],
-                    },
                   },
+                }}
+                initial="initial"
+                animate="animate"
+                transition={{
+                  delay: 1 + i * 0.1,
+                  duration: 0.75,
+                  ease: [0.45, 0.19, 0.07, 0.8],
                 }}
               >
                 {letter}
@@ -67,7 +68,7 @@ export const GooeyButton = ({ children, ...props }) => {
                   x: "0%",
                 },
                 hover: {
-                  scale: 1,
+                  scale: [1, 1],
                   x: "200%",
                   transition: {
                     type: "tween",
@@ -78,7 +79,7 @@ export const GooeyButton = ({ children, ...props }) => {
               }}
               transition={{
                 type: "tween",
-                duration: 1,
+                duration: 1.5,
                 ease: [1, 0.15, 0.6, 0.62],
               }}
               className="text-white flex bg-black items-center justify-center h-16 w-16 rounded-xl"
