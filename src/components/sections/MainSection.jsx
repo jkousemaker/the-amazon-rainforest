@@ -48,7 +48,7 @@ function Background({ progress, loaded }) {
     <>
       <MotionImage
         layout
-        src="/hero.jpg"
+        src="/img/hero.jpg"
         fill
         alt="dev"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

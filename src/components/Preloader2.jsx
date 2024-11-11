@@ -29,7 +29,7 @@ export default function Preloader2() {
         <div className="size-60 md:size-[18rem]">
           <motion.div
             className="relative size-full z-50 "
-            initial={{ scale: 0, opacity: 0, rotate: 360 }}
+            initial={{ scale: 0, opacity: 0, rotate: 180 }}
             animate={{ opacity: 1, scale: 1, rotate: 360 }}
             transition={{
               type: "spring",

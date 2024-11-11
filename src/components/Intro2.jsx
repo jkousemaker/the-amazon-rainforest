@@ -16,6 +16,7 @@ import { cn } from "@/lib/cn";
 
 const MotionImage = motion.create(Image);
 import { introImages } from "@/data/introImages";
+import { GooeyButton } from "./ui/GooeyButton";
 
 function Row({ row, index, onImageLoad, hasLoaded }) {
   const mousePosition = useMousePosition();
@@ -190,16 +191,9 @@ export default function Intro2() {
           );
         })}
       </motion.div>
-      <motion.button
-        onClick={() => {
-          setIntro(false);
-        }}
-        className={cn(
-          "px-10 py-4 text-sm mx-auto  absolute font-semibold pointer-events-auto bg-orange-400/30 hover:bg-[#0003] transition-all duration-300 ease-in-out rounded-full border-black border  z-[99999] "
-        )}
-      >
-        EXPLORE
-      </motion.button>
+      {introLoaded && (
+        <GooeyButton onClick={() => setIntro(false)}>EXPLORE</GooeyButton>
+      )}
     </>
   );
 }

@@ -15,7 +15,7 @@ export default function VideoSection() {
 
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ["-1 1", "0 0"],
+    offset: ["-1 1", "0 -0.2"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["-100%", "0%"]);
   const transparent = useTransform(scrollYProgress, [0, 1], [80, 0]);

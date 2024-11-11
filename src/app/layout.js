@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
         <LenisScroll>
           <Overlay />
           <IntroWrapper />
-          <main className="flex relative z-50">{children}</main>
+          <main className="flex relative z-50 overflow-clip">{children}</main>
         </LenisScroll>
       </body>
     </html>
