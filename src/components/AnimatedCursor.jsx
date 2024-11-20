@@ -21,7 +21,7 @@ export default function AnimatedCursor() {
         x: smoothMousePosition.x,
         y: smoothMousePosition.y,
       }}
-      className="relative    z-[999999] size-4 bg-black rounded-full pointer-events-none"
+      className="relative    z-[999999] size-4 bg-secondary rounded-full pointer-events-none"
     ></motion.div>
   );
 }

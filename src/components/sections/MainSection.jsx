@@ -17,8 +17,6 @@ import { cn } from "@/lib/cn";
 import Image from "next/image";
 import { ScrollText } from "lucide-react";
 export default function MainSection() {
-  const { loaded, intro } = useStore();
-
   const section = useRef();
   const { scrollYProgress } = useScroll({
     target: section,
@@ -27,7 +25,7 @@ export default function MainSection() {
     <section ref={section} className="h-[300vh] relative overflow-clip">
       <motion.div className="h-screen w-full sticky top-0">
         <div className="size-full relative">
-          <Background progress={scrollYProgress} loaded={loaded} />
+          <Background progress={scrollYProgress} />
           <ScrollingText progress={scrollYProgress} />
         </div>
       </motion.div>
@@ -35,7 +33,7 @@ export default function MainSection() {
   );
 }
 
-function Background({ progress, loaded }) {
+function Background({ progress }) {
   const MotionImage = motion.create(Image);
   const blur = useTransform(progress, [0.3, 1], [0, 20]);
   const brightness = useTransform(progress, [0, 1], [1, 0.5]);
@@ -60,21 +58,24 @@ function Background({ progress, loaded }) {
           ease: [0.84, 0.01, 0.6, 0.9],
         }}
       />
-
-      <motion.div
-        layoutId="intro-img"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: loaded ? 1 : 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0,
-        }}
-        style={{ filter, scale }}
-        className="overflow-clip size-full z-10 relative block"
-      >
-        <SectionVideo />
-      </motion.div>
+      <Video filter={filter} scale={scale} />
     </>
+  );
+}
+
+function Video({ filter, scale }) {
+  const { loaded } = useStore();
+  return (
+    <motion.div
+      style={{
+        filter,
+        scale,
+        opacity: loaded ? 1 : 0,
+      }}
+      className="overflow-clip size-full z-10 relative block transition-opacity duration-500"
+    >
+      <SectionVideo />
+    </motion.div>
   );
 }
 

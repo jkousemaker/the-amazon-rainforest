@@ -8,6 +8,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        primary: "#0f1700",
+        primaryForeground: "#c7d3b0",
+        primaryBackground: "#070a00",
+        secondary: "#3b1c00",
+        secondaryForeground: "#f2e5d9",
+        secondaryBackground: "#4C2400",
+
         accent: "#f9ffeb",
       },
       animation: {

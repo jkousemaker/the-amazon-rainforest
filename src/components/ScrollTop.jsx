@@ -8,14 +8,22 @@ import {
   useTransform,
   useSpring,
   AnimatePresence,
+  motionValue,
 } from "framer-motion";
 import { ChevronUp, Mouse } from "lucide-react";
 import { useStore } from "@/store";
 import { TextShimmer } from "@/components/core/text-shimmer";
 
 export default function ScrollTop() {
-  const { scrollYProgress } = useScroll();
-
+  const { scrollYProgress, scrollY } = useScroll();
+  const scale = useSpring(0, { stiffness: 200, damping: 20 });
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 2500) {
+      scale.set(1);
+    } else if (latest < 1000) {
+      scale.set(0);
+    }
+  });
   const lenis = useLenis();
   const scrollToTop = () => {
     // You can use either of these methods
@@ -36,6 +44,7 @@ export default function ScrollTop() {
     >
       <motion.button
         onClick={scrollToTop}
+        style={{ opacity: scale, scale }}
         className="absolute bottom-0 right-0 m-5 pointer-events-auto bg-white size-14 rounded-full"
       >
         <span className="size-full absolute inset-0">
@@ -83,7 +92,7 @@ function ScrollProgress() {
 
 function ScrollIndicator() {
   return (
-    <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold mb-5">
+    <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold mb-5 z-[99999] pointer-events-auto">
       <TextShimmer
         duration={3}
         spread={10}

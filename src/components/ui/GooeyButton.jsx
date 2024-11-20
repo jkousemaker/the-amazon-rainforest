@@ -23,13 +23,13 @@ export const GooeyButton = ({ children, ...props }) => {
               },
             },
             hover: {
-              scale: 1,
+              scale: 0.9,
             },
           }}
           initial="initial"
           animate="animate"
           whileHover="hover"
-          className="relative bg-black text-gray-200 inline-flex font-bold px-6 py-0 rounded-xl text-xl leading-5 h-16 items-center"
+          className="relative group  bg-secondary text-secondaryForeground inline-flex font-bold px-6 py-0 rounded-xl text-xl leading-5 h-16 items-center"
         >
           {letters.map((letter, i) => (
             <span key={i} className="relative flex overflow-hidden">
@@ -68,7 +68,7 @@ export const GooeyButton = ({ children, ...props }) => {
                   x: "0%",
                 },
                 hover: {
-                  scale: [1, 1],
+                  scale: [null, 1, 1],
                   x: "200%",
                   transition: {
                     type: "tween",
@@ -82,7 +82,7 @@ export const GooeyButton = ({ children, ...props }) => {
                 duration: 1.5,
                 ease: [1, 0.15, 0.6, 0.62],
               }}
-              className="text-white flex bg-black items-center justify-center h-16 w-16 rounded-xl"
+              className="text-secondaryForeground flex bg-secondary items-center justify-center h-16 w-16 rounded-xl"
             >
               <ArrowBigRight size={8} className="h-8 w-8" />
             </motion.div>

@@ -55,7 +55,7 @@ export default function Preloader2() {
           duration: 1,
           ease: [0.78, 0.15, 0.84, 0.67],
         }}
-        className="absolute z-0 inset-0 bg-slate-950 pointer-events-auto"
+        className="absolute z-0 inset-0 bg-primaryBackground pointer-events-auto"
       ></motion.div>
     </motion.div>
   );

@@ -8,22 +8,23 @@ import MainSection from "@/components/sections/MainSection";
 import { useStore } from "@/store";
 import VideoSection from "@/components/sections/VideoSection";
 import CardDevSection from "@/components/sections/CardDevSection";
+
 export default function Home() {
   const { intro } = useStore();
   return (
     <>
-      {!intro && (
-        <div className="flex flex-col w-full">
-          <MainSection />
-
-          <SloganSection />
-          <VideoSection />
-          <CardDevSection />
-          <CardSection />
-
-          <AboutSection />
-        </div>
-      )}
+      <div className="flex flex-col w-full relative z-50">
+        {!intro && (
+          <>
+            <MainSection />
+            <SloganSection />
+            <VideoSection />
+            <CardDevSection />
+            <CardSection />
+            <AboutSection />
+          </>
+        )}
+      </div>
     </>
   );
 }
