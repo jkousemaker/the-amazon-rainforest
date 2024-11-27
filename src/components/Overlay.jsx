@@ -9,6 +9,7 @@ import { AnimatePresence } from "framer-motion";
 import { useStore } from "@/store";
 
 import Preloader2 from "./Preloader2";
+
 export default function Overlay() {
   const { intro } = useStore();
   const elements = [
@@ -35,7 +36,7 @@ export default function Overlay() {
         <OverlayElement zIndex={9999}>
           <AnimatedCursor />
         </OverlayElement>
-
+        <OverlayElement zIndex={999}></OverlayElement>
         {!intro && (
           <OverlayElement zIndex={10}>
             <ScrollTop />

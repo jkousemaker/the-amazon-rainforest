@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Logo from "./Logo";
 import { useStore } from "@/store";
+import { AudioButton } from "./AudioButton";
 export default function Preloader2() {
   const { introLoaded } = useStore();
 
@@ -24,6 +25,9 @@ export default function Preloader2() {
             </motion.div>
           )}
         </motion.div>
+        <div className="grid">
+          <AudioButton />
+        </div>
       </header>
       {!introLoaded && (
         <div className="size-60 md:size-[18rem]">

@@ -8,7 +8,7 @@ import MainSection from "@/components/sections/MainSection";
 import { useStore } from "@/store";
 import VideoSection from "@/components/sections/VideoSection";
 import CardDevSection from "@/components/sections/CardDevSection";
-
+import CarouselSection from "@/components/sections/Carousel";
 export default function Home() {
   const { intro } = useStore();
   return (
@@ -19,6 +19,7 @@ export default function Home() {
             <MainSection />
             <SloganSection />
             <VideoSection />
+            <CarouselSection />
             <CardDevSection />
             <CardSection />
             <AboutSection />
