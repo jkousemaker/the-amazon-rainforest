@@ -192,7 +192,9 @@ export default function Intro2() {
         })}
       </motion.div>
       {introLoaded && (
-        <GooeyButton onClick={() => setIntro(false)}>EXPLORE</GooeyButton>
+        <GooeyButton onClick={() => setIntro(false)} className="z-[999999]">
+          EXPLORE
+        </GooeyButton>
       )}
     </>
   );

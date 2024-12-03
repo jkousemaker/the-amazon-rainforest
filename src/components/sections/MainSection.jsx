@@ -49,7 +49,7 @@ function Background({ progress }) {
         src="/img/hero.jpg"
         fill
         alt="dev"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        sizes="100vw"
         layoutId="hero-layout-image"
         className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
         style={{ filter, scale }}
@@ -70,9 +70,15 @@ function Video({ filter, scale }) {
       style={{
         filter,
         scale,
+      }}
+      initial={false}
+      animate={{
         opacity: loaded ? 1 : 0,
       }}
-      className="overflow-clip size-full z-10 relative block transition-opacity duration-500"
+      transition={{
+        duration: 1,
+      }}
+      className="overflow-clip size-full z-10 relative block"
     >
       <SectionVideo />
     </motion.div>

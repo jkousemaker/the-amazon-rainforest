@@ -13,7 +13,7 @@ import {
 import { ChevronUp, Mouse } from "lucide-react";
 import { useStore } from "@/store";
 import { TextShimmer } from "@/components/core/text-shimmer";
-
+import { ScrollProgress as Progress } from "./core/scroll-progress";
 export default function ScrollTop() {
   const { scrollYProgress, scrollY } = useScroll();
   const scale = useSpring(0, { stiffness: 200, damping: 20 });
@@ -79,12 +79,15 @@ export default function ScrollTop() {
 }
 
 function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
   return (
     <div className="absolute w-full top-0 left-0">
-      <motion.div
-        style={{ scaleX: scrollYProgress }}
-        className="w-full h-1 bg-blue-400 origin-left"
+      <Progress
+        className="absolute top-0 h-2 w-full z-[999999999999999] bg-[linear-gradient(to_right,rgba(0,0,0,0),#0f1700_75%,#0f1700_100%)] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0),#ffffff_75%,#ffffff_100%)]"
+        springOptions={{
+          stiffness: 280,
+          damping: 18,
+          mass: 0.3,
+        }}
       />
     </div>
   );
