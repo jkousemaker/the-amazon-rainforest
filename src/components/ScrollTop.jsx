@@ -10,7 +10,7 @@ import {
   AnimatePresence,
   motionValue,
 } from "framer-motion";
-import { ChevronUp, Mouse } from "lucide-react";
+import { ChevronDown, ChevronUp, Mouse } from "lucide-react";
 import { useStore } from "@/store";
 import { TextShimmer } from "@/components/core/text-shimmer";
 import { ScrollProgress as Progress } from "./core/scroll-progress";
@@ -96,15 +96,13 @@ function ScrollProgress() {
 function ScrollIndicator() {
   return (
     <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold mb-5 z-[99999] pointer-events-auto">
-      <TextShimmer
-        duration={3}
-        spread={10}
-        initialPosition={120}
-        animatePosition={-20}
-        className="text-2xl flex relative [--base-color:theme(colors.black)] [--base-gradient-color:theme(colors.blue.200)]"
-      >
-        SCROLL DOWN
-      </TextShimmer>
+      <div className="grid place-items-center size-10">
+        <ChevronDown size={40} className="text-white absolute animate-bounce" />
+        <ChevronDown
+          size={80}
+          className="text-white absolute mt-7 animate-pulse"
+        />
+      </div>
     </div>
   );
 }

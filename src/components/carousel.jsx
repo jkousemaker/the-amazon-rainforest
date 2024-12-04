@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { items } from "@/data/carouselitems";
 import { Spotlight } from "./core/spotlight";
-import CanvasButton from "./ui/CanvasButton";
+import { GooeyButton } from "./ui/GooeyButton";
 import {
   Dialog,
   DialogTrigger,
@@ -127,9 +127,9 @@ function Card({ itemData, index }) {
                 },
               }}
             >
-              <CanvasButton ref={triggerRef} className="!z-[999909] relative">
+              <GooeyButton ref={triggerRef} className="!z-[999909] relative">
                 Discover
-              </CanvasButton>
+              </GooeyButton>
             </motion.div>
           </div>
         </motion.div>

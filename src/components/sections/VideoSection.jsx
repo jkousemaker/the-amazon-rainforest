@@ -35,7 +35,7 @@ export default function VideoSection() {
   return (
     <section
       ref={container}
-      className="h-[200vh] relative z-50  bg-black text-white mb-"
+      className="h-[150vh] relative z-50  bg-black text-white mb-"
     >
       <motion.div
         className="relative h-full flex flex-col"
@@ -63,32 +63,6 @@ export default function VideoSection() {
             }, 1500);
           }}
         />
-        <div className=" h-screen relative z-50 p-4 ">
-          <div className="flex flex-row items-end mb-14">
-            <motion.div
-              style={{ logoY }}
-              className="h-32 w-full absolute mx-auto"
-            >
-              <Logo />
-            </motion.div>
-
-            <h1 className="text-4xl ml-5">Amazon Rainforest</h1>
-          </div>
-          <div className="max-w-3xl mb-10">
-            <p className="text-3xl leading-10">
-              An immersive and interactive experience. Built for educators,
-              students and anyone passionate about nature and its wonders.
-            </p>
-          </div>
-          <div className="max-w-4xl">
-            <p className="text-3xl leading-10 ">
-              Amazon Rainforest was born from the purpose of bringing the beauty
-              and diversity of the world´s largest tropical florest, offering an
-              unique experience, where users can explore and have an interactive
-              learning experience.
-            </p>
-          </div>
-        </div>
       </motion.div>
     </section>
   );

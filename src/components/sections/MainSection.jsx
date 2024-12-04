@@ -121,8 +121,8 @@ function Slider({ progress }) {
 function Header({ progress }) {
   const scale = useTransform(progress, [0, 0.5, 1], [1, 10, 40]);
   const origin = {
-    x: useTransform(progress, [0, 1], [63, 62.66]),
-    y: useTransform(progress, [0, 1], [30, 60]),
+    x: useTransform(progress, [0, 0.5], [63, 62.36]),
+    y: useTransform(progress, [0, 0.8], [30, 61]),
   };
   return (
     <motion.h1
@@ -130,7 +130,7 @@ function Header({ progress }) {
         scale,
         transformOrigin: useMotionTemplate`${origin.x}% ${origin.y}%`,
       }}
-      className="text-9xl whitespace-nowrap  font-semibold tracking-[-0.06em]   "
+      className="text-9xl whitespace-nowrap  font-bold tracking-[-0.06em]   "
     >
       Amazon Rainforest
     </motion.h1>

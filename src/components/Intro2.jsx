@@ -13,10 +13,9 @@ import useScreenSize from "@/hooks/useScreenSize";
 import useMousePosition from "@/hooks/useMousePosition";
 import { useStore } from "@/store";
 import { cn } from "@/lib/cn";
-
+import CanvasButton from "./ui/CanvasButton";
 const MotionImage = motion.create(Image);
 import { introImages } from "@/data/introImages";
-import { GooeyButton } from "./ui/GooeyButton";
 
 function Row({ row, index, onImageLoad, hasLoaded }) {
   const mousePosition = useMousePosition();
@@ -192,9 +191,11 @@ export default function Intro2() {
         })}
       </motion.div>
       {introLoaded && (
-        <GooeyButton onClick={() => setIntro(false)} className="z-[999999]">
-          EXPLORE
-        </GooeyButton>
+        <div className="absolute !z-[999909] grid place-items-center size-full">
+          <CanvasButton className="relative" onClick={() => setIntro(false)}>
+            Discover
+          </CanvasButton>
+        </div>
       )}
     </>
   );

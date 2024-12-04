@@ -67,7 +67,6 @@ export default function CardSection() {
       className="w-full"
     >
       <MiddleCards />
-      <SlideCards />
     </section>
   );
 }
@@ -187,10 +186,8 @@ function SlideCard({ amount, card, scrollYProgress, index }) {
   return (
     <motion.div
       className="h-min aspect-[2/3] w-full relative"
-      
       style={{
-        transformOrigin: "100% -450%", 
-        
+        transformOrigin: "100% -450%",
 
         x,
         rotate,

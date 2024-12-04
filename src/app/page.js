@@ -20,7 +20,7 @@ export default function Home() {
             <SloganSection />
             <VideoSection />
             <CarouselSection />
-            <CardDevSection />
+
             <CardSection />
             <AboutSection />
           </>
