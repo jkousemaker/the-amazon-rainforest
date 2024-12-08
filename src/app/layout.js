@@ -6,6 +6,7 @@ import Overlay from "@/components/Overlay";
 import IntroWrapper from "@/components/IntroWrapper";
 
 import BackgroundCanvas from "@/components/BackgroundCanvas";
+import Footer from "@/components/Footer";
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
           <Overlay />
           <IntroWrapper />
           <main className="flex relative z-50 overflow-clip">{children}</main>
+          <Footer />
         </LenisScroll>
       </body>
     </html>

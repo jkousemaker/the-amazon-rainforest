@@ -7,16 +7,13 @@ import { items } from "@/data/carouselitems";
 import { Spotlight } from "./core/spotlight";
 import { GooeyButton } from "./ui/GooeyButton";
 import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogImage,
-  DialogSubtitle,
-  DialogClose,
-  DialogDescription,
-  DialogContainer,
-} from "@/components/core/dialog";
+  MorphingDialog,
+  MorphingDialogTrigger,
+  MorphingDialogContent,
+  MorphingDialogClose,
+  MorphingDialogImage,
+  MorphingDialogContainer,
+} from "@/components/core/morphing-dialog";
 const MotionImage = motion.create(Image);
 function Carousel() {
   const controls = useDragControls();
@@ -27,7 +24,7 @@ function Carousel() {
   useEffect(() => {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, [carousel]);
-  const MotionDialogTrigger = motion.create(DialogTrigger);
+
   return (
     <motion.div
       layoutScroll
@@ -52,8 +49,11 @@ function Card({ itemData, index }) {
   const triggerRef = useRef(null);
   const [state, setState] = useState(false);
   return (
-    <Dialog key={index}>
-      <DialogTrigger triggerRef={triggerRef} className="size-full h-full">
+    <MorphingDialog key={index}>
+      <MorphingDialogTrigger
+        triggerRef={triggerRef}
+        className="size-full h-full"
+      >
         <motion.div
           initial="initial"
           animate="animate"
@@ -84,7 +84,7 @@ function Card({ itemData, index }) {
               duration: 1,
             }}
           >
-            <DialogImage
+            <MorphingDialogImage
               src={itemData?.url}
               width={400}
               height={400}
@@ -133,24 +133,24 @@ function Card({ itemData, index }) {
             </motion.div>
           </div>
         </motion.div>
-      </DialogTrigger>
-      <DialogContainer>
-        <DialogContent
+      </MorphingDialogTrigger>
+      <MorphingDialogContainer>
+        <MorphingDialogContent
           style={{
             borderRadius: "24px",
           }}
           className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]"
         >
-          <DialogImage
+          <MorphingDialogImage
             src={itemData?.url}
             width={400}
             height={400}
             alt="img"
             className="w-full h-full object-cover pointer-events-none  "
           />
-        </DialogContent>
-      </DialogContainer>
-    </Dialog>
+        </MorphingDialogContent>
+      </MorphingDialogContainer>
+    </MorphingDialog>
   );
 }
 

@@ -12,6 +12,7 @@ export function MagnifyIcon({ isOpen, isHover }) {
       resize={{ offsetSize: true }}
       dpr={[1, 2]}
       camera={{ position: [0, 0, 5.5], fov: 45 }}
+      className="!pointer-events-none"
     >
       {lights.map(([x, y, z, intensity], i) => (
         <pointLight

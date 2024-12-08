@@ -1,16 +1,16 @@
 "use client";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-  DialogImage,
-  DialogSubtitle,
-  DialogClose,
-  DialogDescription,
-  DialogContainer,
-} from "@/components/core/dialog";
 
+import {
+  MorphingDialog,
+  MorphingDialogTrigger,
+  MorphingDialogContent,
+  MorphingDialogClose,
+  MorphingDialogImage,
+  MorphingDialogContainer,
+  MorphingDialogTitle,
+  MorphingDialogSubtitle,
+  MorphingDialogDescription,
+} from "@/components/core/morphing-dialog";
 const cards = [
   {
     id: 0,
@@ -58,7 +58,7 @@ export default function CardDevSection() {
   return (
     <section className="h-screen relative z-20 bg-black flex flex-row justify-center items-center gap-5">
       {cards.map((card, i) => {
-        return <DialogBasicOne key={i} card={card} index={i} />;
+        return <MorphingDialogBasicOne key={i} card={card} index={i} />;
       })}
     </section>
   );
@@ -66,29 +66,29 @@ export default function CardDevSection() {
 
 function DialogBasicImage({ card, index }) {
   return (
-    <Dialog
+    <MorphingDialog
       transition={{
         type: "spring",
         bounce: 0.05,
         duration: 1,
       }}
     >
-      <DialogTrigger className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900">
-        <DialogImage
+      <MorphingDialogTrigger className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900">
+        <MorphingDialogImage
           src={card.img}
           alt="Sony Style Store in the Sony Center complex - Berlin, Germany (2000)"
           className="h-48 w-full object-cover"
         />
-      </DialogTrigger>
-      <DialogContainer>
-        <DialogContent className="relative">
-          <DialogImage
+      </MorphingDialogTrigger>
+      <MorphingDialogContainer>
+        <MorphingDialogContent className="relative">
+          <MorphingDialogImage
             src={card.img}
             alt="Sony Style Store in the Sony Center complex - Berlin, Germany (2000)"
             className="h-auto w-screen object-cover"
           />
-        </DialogContent>
-        <DialogClose
+        </MorphingDialogContent>
+        <MorphingDialogClose
           className="fixed right-6 top-6 h-fit w-fit rounded-full bg-white p-1"
           variants={{
             initial: { opacity: 0 },
@@ -100,40 +100,40 @@ function DialogBasicImage({ card, index }) {
           }}
         >
           X
-        </DialogClose>
-      </DialogContainer>
-    </Dialog>
+        </MorphingDialogClose>
+      </MorphingDialogContainer>
+    </MorphingDialog>
   );
 }
 
-function DialogBasicOne({ card, index }) {
+function MorphingDialogBasicOne({ card, index }) {
   return (
-    <Dialog
+    <MorphingDialog
       transition={{
         type: "spring",
         bounce: 0.05,
         duration: 1,
       }}
     >
-      <DialogTrigger
+      <MorphingDialogTrigger
         style={{
           borderRadius: "12px",
         }}
         className="flex max-w-[270px] flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
       >
-        <DialogImage
+        <MorphingDialogImage
           src={card.img}
           alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
           className="h-48 w-full object-cover"
         />
         <div className="flex flex-grow flex-row items-end justify-between p-2">
           <div>
-            <DialogTitle className="text-zinc-950 dark:text-zinc-50">
+            <MorphingDialogTitle className="text-zinc-950 dark:text-zinc-50">
               EB27
-            </DialogTitle>
-            <DialogSubtitle className="text-zinc-700 dark:text-zinc-400">
+            </MorphingDialogTitle>
+            <MorphingDialogSubtitle className="text-zinc-700 dark:text-zinc-400">
               Edouard Wilfrid Buquet
-            </DialogSubtitle>
+            </MorphingDialogSubtitle>
           </div>
           <button
             type="button"
@@ -143,27 +143,27 @@ function DialogBasicOne({ card, index }) {
             +
           </button>
         </div>
-      </DialogTrigger>
-      <DialogContainer>
-        <DialogContent
+      </MorphingDialogTrigger>
+      <MorphingDialogContainer>
+        <MorphingDialogContent
           style={{
             borderRadius: "24px",
           }}
           className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900 sm:w-[500px]"
         >
-          <DialogImage
+          <MorphingDialogImage
             src={card.img}
             alt="A desk lamp designed by Edouard Wilfrid Buquet in 1925. It features a double-arm design and is made from nickel-plated brass, aluminium and varnished wood."
             className="h-full w-full"
           />
           <div className="p-6">
-            <DialogTitle className="text-2xl text-zinc-950 dark:text-zinc-50">
+            <MorphingDialogTitle className="text-2xl text-zinc-950 dark:text-zinc-50">
               EB27
-            </DialogTitle>
-            <DialogSubtitle className="text-zinc-700 dark:text-zinc-400">
+            </MorphingDialogTitle>
+            <MorphingDialogSubtitle className="text-zinc-700 dark:text-zinc-400">
               Edouard Wilfrid Buquet
-            </DialogSubtitle>
-            <DialogDescription
+            </MorphingDialogSubtitle>
+            <MorphingDialogDescription
               disableLayoutAnimation
               variants={{
                 initial: { opacity: 0, scale: 0.8, y: 100 },
@@ -189,11 +189,11 @@ function DialogBasicOne({ card, index }) {
               >
                 Are.na block
               </a>
-            </DialogDescription>
+            </MorphingDialogDescription>
           </div>
-          <DialogClose className="text-zinc-50" />
-        </DialogContent>
-      </DialogContainer>
-    </Dialog>
+          <MorphingDialogClose className="text-zinc-50" />
+        </MorphingDialogContent>
+      </MorphingDialogContainer>
+    </MorphingDialog>
   );
 }

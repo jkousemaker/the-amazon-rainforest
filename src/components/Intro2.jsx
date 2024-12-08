@@ -192,8 +192,12 @@ export default function Intro2() {
       </motion.div>
       {introLoaded && (
         <div className="absolute !z-[999909] grid place-items-center size-full">
-          <CanvasButton className="relative" onClick={() => setIntro(false)}>
-            Discover
+          <CanvasButton
+            className="relative bg-[#915A08] text-white uppercase"
+            va
+            onClick={() => setIntro(false)}
+          >
+            Explore
           </CanvasButton>
         </div>
       )}
