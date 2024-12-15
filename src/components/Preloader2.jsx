@@ -105,6 +105,21 @@ export default function Preloader2() {
 }
 
 function Tile({}) {
+  const container = useRef(null);
+  const screenSize = useScreenSize(); // { width, height }
+  const middleIndex = Math.floor(20 / 2);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offsets: ["start end", "start start"],
+  });
+  const distanceFromMiddle = Math.abs(-middleIndex);
+  const isActive = scrollYProgress.get() > 0.5;
+  const y = useTransform(
+    scrollYProgress,
+    [distanceFromMiddle, 1],
+    [screenSize.height, 0],
+    { clamp: true, ease: cubicBezier(0.31, 0.58, 0.48, 0.99) }
+  );
   return (
     <motion.div
       variants={{
@@ -174,30 +189,9 @@ function NavMenu() {
 }
 
 function NavMenuButton({ set }) {
-  const container = useRef(null);
-  const screenSize = useScreenSize(); // { width, height }
-  const middleIndex = Math.floor(20 / 2);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offsets: ["start end", "start start"],
-  });
-  const distanceFromMiddle = Math.abs(-middleIndex);
-  const isActive = scrollYProgress.get() > 0.5;
-  const y = useTransform(
-    scrollYProgress,
-    [distanceFromMiddle, 1],
-    [screenSize.height, 0],
-    { clamp: true, ease: cubicBezier(0.31, 0.58, 0.48, 0.99) }
-  );
   return (
-    <div
-      ref={container}
-      className="relative flex flex-row justify-between w-full  top-0 right-0 h-[40px] cursor-pointer rounded-[25px] overflow-hidden"
-    >
-      <motion.button
-        style={{ y }}
-        className="relative size-full pointer-events-auto"
-      >
+    <div className="relative flex flex-row justify-between w-full  top-0 right-0 h-[40px] cursor-pointer rounded-[25px] overflow-hidden">
+      <motion.button className="relative size-full pointer-events-auto">
         <div
           className="size-full bg-[#c9fd74]"
           onClick={() => {
@@ -207,7 +201,6 @@ function NavMenuButton({ set }) {
           <PerspectiveText label="Menu" />
         </div>
         <motion.div
-          animate={{ top: isActive ? "-100%" : "0%" }}
           transition={{
             duration: 0.5,
             type: "tween",
