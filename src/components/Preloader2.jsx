@@ -97,30 +97,32 @@ export default function Preloader2() {
         className="absolute z-0 inset-0   flex flex-row justify-center items-center til pointer-events-none"
       >
         {Array.from({ length: tileAmount }).map((_, i) => {
-          return (
-            <motion.div
-              key={i}
-              variants={{
-                open: {
-                  y: 0,
-                },
-                closed: {
-                  y: "-100%",
-                },
-              }}
-              transition={{
-                type: "tween",
-                duration: 1,
-                ease: [0.78, 0.15, 0.84, 0.67],
-              }}
-              className="relative flex-1 flex  h-full w-full"
-            >
-              <motion.div className="h-full flex-1 bg-gradient-to-r from-primaryBackground to-black relative  w-20 pointer-events-auto" />
-              <BorderTrail size={250} delay={1} className="opacity-50" />
-            </motion.div>
-          );
+          return <Tile key={i} />;
         })}
       </motion.div>
+    </motion.div>
+  );
+}
+
+function Tile({}) {
+  return (
+    <motion.div
+      variants={{
+        open: {
+          y: 0,
+        },
+        closed: {
+          y: "-100%",
+        },
+      }}
+      transition={{
+        type: "tween",
+        duration: 1,
+        ease: [0.78, 0.15, 0.84, 0.67],
+      }}
+      className="relative flex-1 flex  h-full w-full"
+    >
+      <motion.div className="h-full flex-1 bg-gradient-to-r from-primaryBackground to-black relative  w-20 pointer-events-auto" />
     </motion.div>
   );
 }
@@ -190,7 +192,7 @@ function NavMenuButton({ set }) {
   return (
     <div
       ref={container}
-      className="relative flex flex-row justify-between w-full  top-0 right-0 w-[100px] h-[40px] cursor-pointer rounded-[25px] overflow-hidden"
+      className="relative flex flex-row justify-between w-full  top-0 right-0 h-[40px] cursor-pointer rounded-[25px] overflow-hidden"
     >
       <motion.button
         style={{ y }}
