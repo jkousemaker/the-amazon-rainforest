@@ -39,7 +39,7 @@ export function MagnifyIcon({ isOpen, isHover }) {
               x: 4,
               y: [0, -1.5, 2],
               scale: 0.5,
-              transition: { duration: 0.5 },
+              transition: { duration: 1 },
             },
             hover: {
               rotateZ: 0,

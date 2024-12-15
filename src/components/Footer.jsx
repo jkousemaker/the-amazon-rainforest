@@ -2,36 +2,52 @@
 import React, { useRef } from "react";
 import { InfiniteSlider } from "@/components/core/infinite-slider";
 import Image from "next/image";
-import { motion, useScroll } from "framer-motion";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 export default function Footer() {
+  const container = useRef();
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "end end"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [200, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
   return (
     <div
+      ref={container}
       className="relative h-[800px] bg-[#345001] text-white flex"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="relative h-[calc(100vh+800px)] -top-[100vh] w-full">
+      <motion.div
+        style={{ y, scale }}
+        className="relative h-[calc(100vh+800px)] -top-[100vh] w-full "
+      >
         <div className="h-[800px] sticky top-[calc(100vh-800px)] w-full">
           <Content />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
 
 function Content() {
   return (
-    <div className="size-full p-5 flex flex-col justify-center items-center gap-20">
+    <div className="size-full p-5 flex flex-col justify-center items-center gap-28">
       <div className="flex flex-col gap-10">
         <p className="flex text-center gap-2 text-xl font-semibold">
           <span>Rita Paredes</span>|<span>Leonor Batista</span>|
           <span>Gabryella Teixeira</span>
         </p>
-        <div className="h-16">
+        <div className="h-10 mx-auto">
           <BrandLogo />
         </div>
       </div>
-      <div className="flex flex-col gap-5">
-        <p className="flex text-center gap-2 text-xl font-semibold">
+      <div className="flex flex-col items-center gap-5">
+        <p className="flex text-center gap-2 text-xl font-semibold mb-10">
           Software used:
         </p>
         <InfiniteSlider className="!max-w-xl">

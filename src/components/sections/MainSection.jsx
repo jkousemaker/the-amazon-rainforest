@@ -16,6 +16,7 @@ import useMousePosition from "@/hooks/useMousePosition";
 import { cn } from "@/lib/cn";
 import Image from "next/image";
 import { ScrollText } from "lucide-react";
+import { TextShimmer } from "@/components/core/text-shimmer";
 export default function MainSection() {
   const section = useRef();
   const { scrollYProgress } = useScroll({
@@ -56,6 +57,7 @@ function Background({ progress }) {
         transition={{
           duration: 0.8,
           ease: [0.84, 0.01, 0.6, 0.9],
+          opacity: { delay: 10.5, ease: "linear", duration: 10.3 },
         }}
       />
       <Video filter={filter} scale={scale} />
@@ -101,7 +103,7 @@ function ScrollingText({ progress }) {
         duration: 1,
         ease: [0, 0.25, 0, 0.99],
       }}
-      className="z-50 top-0 left-0 w-full absolute h-full flex justify-center items-center"
+      className="z-50 top-0 left-0 w-full absolute h-full flex flex-col justify-center items-center"
     >
       <Slider progress={progress} />
       <Header progress={progress} />
@@ -124,15 +126,34 @@ function Header({ progress }) {
     x: useTransform(progress, [0, 0.5], [63, 62.36]),
     y: useTransform(progress, [0, 0.8], [30, 61]),
   };
+  const x = useTransform(progress, [0, 0.75], [0, 900]);
+  const y = useTransform(progress, [0, 1], [0, -50]);
   return (
-    <motion.h1
+    <motion.div
       style={{
         scale,
         transformOrigin: useMotionTemplate`${origin.x}% ${origin.y}%`,
       }}
-      className="text-9xl whitespace-nowrap  font-bold tracking-[-0.06em]   "
+      className="flex justify-center items-center relative"
     >
-      Amazon Rainforest
-    </motion.h1>
+      <motion.h1 className="text-9xl whitespace-nowrap  font-bold tracking-[-0.06em]   ">
+        Amazon Rainforest
+      </motion.h1>
+      <motion.div style={{ x, y }} className="   mt-5 absolute top-28">
+        <motion.h2
+          initial={{ y: "150%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            delay: 0.4,
+            ease: [0.09, 0.41, 0.18, 0.97],
+            duration: 0.4,
+            opacity: { delay: 0.5, ease: "linear", duration: 0.3 },
+          }}
+          className="text-6xl font-bold text-[#EBFFC6] opacity-70 hover:opacity-100 duration-300"
+        >
+          is ready for you
+        </motion.h2>
+      </motion.div>
+    </motion.div>
   );
 }

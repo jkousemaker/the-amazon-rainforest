@@ -26,8 +26,6 @@ export default function Home() {
             <VideoSection />
             <CarouselSection />
 
-            <CardSection />
-            <AboutSection />
             <DownloadSection />
           </>
         )}

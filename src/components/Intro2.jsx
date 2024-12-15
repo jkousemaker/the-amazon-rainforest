@@ -62,11 +62,13 @@ function Row({ row, index, onImageLoad, hasLoaded }) {
 }
 
 function Card({ card, index, onImageLoad, hasLoaded }) {
+  const { intro } = useStore();
   const max = 10;
   const min = 1;
   const rand = Math.floor(Math.random() * (max - min + 1) + min);
   const delay = rand / 10;
-
+  const isHero = card.layoutId === "hero-layout-image";
+  const isRendered = !intro && isHero;
   return (
     <motion.div
       variants={{
@@ -86,16 +88,18 @@ function Card({ card, index, onImageLoad, hasLoaded }) {
       }}
       className="relative size-full overflow-hidden rounded-xl"
     >
-      <MotionImage
-        priority
-        src={card.img}
-        fill
-        alt="dev"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        layoutId={card.layoutId}
-        onLoad={() => onImageLoad(card.id)}
-        className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
-      />
+      {!isRendered && (
+        <MotionImage
+          priority
+          src={card.img}
+          fill
+          alt="dev"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          layoutId={card.layoutId}
+          onLoad={() => onImageLoad(card.id)}
+          className="object-cover [background-position:_50%_70%;] will-change-[transform,_filter]"
+        />
+      )}
     </motion.div>
   );
 }
@@ -194,7 +198,6 @@ export default function Intro2() {
         <div className="absolute !z-[999909] grid place-items-center size-full">
           <CanvasButton
             className="relative bg-[#915A08] text-white uppercase"
-            va
             onClick={() => setIntro(false)}
           >
             Explore

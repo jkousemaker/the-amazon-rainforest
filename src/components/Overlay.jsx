@@ -1,6 +1,6 @@
 "use client";
 import AnimatedCursor from "@/components/AnimatedCursor";
-import Preloader from "@/components/Preloader";
+
 import ScrollTop from "@/components/ScrollTop";
 import Intro2 from "./Intro2";
 import { cn } from "@/lib/cn";
@@ -14,11 +14,11 @@ export default function Overlay() {
   const { intro } = useStore();
   const elements = [
     {
-      file: AnimatedCursor,
+      //file: AnimatedCursor,
       zIndex: 9999,
     },
     {
-      file: Preloader,
+      //file: Preloader,
       zIndex: 999,
     },
   ];

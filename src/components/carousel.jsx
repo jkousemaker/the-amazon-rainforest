@@ -25,6 +25,12 @@ function Carousel() {
     setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
   }, [carousel]);
 
+  const handleDrag = (event, info) => {
+    const scroll = info.offset.x / width;
+    const index = Math.floor(scroll * items.length);
+    setActiveItem(items[index]);
+  };
+
   return (
     <motion.div
       layoutScroll
@@ -90,6 +96,10 @@ function Card({ itemData, index }) {
               height={400}
               alt="img"
               className="w-full h-full object-cover pointer-events-none  "
+            />
+            <Spotlight
+              className="from-blue-800 via-blue-600 to-blue-400 blur-xl dark:from-blue-900 dark:via-blue-500 dark:to-blue-900"
+              size={64}
             />
           </motion.div>
           <div className="absolute inset-0 p-10 flex flex-col justify-between items-center">

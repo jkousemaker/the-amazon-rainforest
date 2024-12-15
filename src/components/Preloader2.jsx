@@ -1,6 +1,12 @@
 "use client";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useEffect, use } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useTransform,
+  cubicBezier,
+  useScroll,
+} from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Logo from "./Logo";
 import { useStore } from "@/store";
 
@@ -30,6 +36,9 @@ import {
 } from "@/components/core/floating-panel";
 import { Volume2, VolumeX } from "lucide-react";
 import AudioPlayer from "react-h5-audio-player";
+import { BorderTrail } from "./core/border-trail";
+import useScreenSize from "@/hooks/useScreenSize";
+const tileAmount = 20;
 export default function Preloader2() {
   const [newsletterDialog, setNewsletterDialog] = useState(false);
   const { introLoaded, intro } = useStore();
@@ -44,35 +53,15 @@ export default function Preloader2() {
         <motion.div
           layout
           className="bg-white"
-          style={{ borderRadius: "999px" }}
+          style={{ borderRadius: "999999px" }}
         >
           {introLoaded && (
-            <motion.div className="relative h-20 w-20">
+            <motion.div className="size-20">
               <LogoContainer />
             </motion.div>
           )}
         </motion.div>
-        {!intro && (
-          <div className="flex flex-row flex-nowrap justify-center items-center gap-5">
-            <TextureButton variant="minimal" className=" pointer-events-auto">
-              About us
-            </TextureButton>
-            <TextureButton
-              variant="minimal"
-              onClick={() => {
-                setNewsletterDialog(true);
-              }}
-              className=" pointer-events-auto"
-            >
-              Newsletter
-            </TextureButton>
-
-            <TextureButton variant="accent" className=" pointer-events-auto">
-              Download
-            </TextureButton>
-            <AudioButton />
-          </div>
-        )}
+        {!intro && <NavMenu />}
 
         <NewsletterDialog
           newsletterDialog={newsletterDialog}
@@ -83,12 +72,18 @@ export default function Preloader2() {
         <div className="size-60 md:size-[18rem]">
           <motion.div
             className="relative size-full z-50 "
-            initial={{ scale: 0, opacity: 0, rotate: 180 }}
-            animate={{ opacity: 1, scale: 1, rotate: 360 }}
+            variants={{
+              open: {
+                y: 0,
+              },
+              closed: {
+                y: "-100%",
+              },
+            }}
             transition={{
-              type: "spring",
-              damping: 9,
-              stiffness: 100,
+              type: "tween",
+              duration: 1,
+              ease: [0.78, 0.15, 0.84, 0.67],
             }}
           >
             <LogoContainer />
@@ -96,6 +91,67 @@ export default function Preloader2() {
         </div>
       )}
       <motion.div
+        initial="open"
+        animate={introLoaded ? "closed" : "open"}
+        transition={{ staggerChildren: 0.1 }}
+        className="absolute z-0 inset-0   flex flex-row justify-center items-center til pointer-events-none"
+      >
+        {Array.from({ length: tileAmount }).map((_, i) => {
+          return (
+            <motion.div
+              key={i}
+              variants={{
+                open: {
+                  y: 0,
+                },
+                closed: {
+                  y: "-100%",
+                },
+              }}
+              transition={{
+                type: "tween",
+                duration: 1,
+                ease: [0.78, 0.15, 0.84, 0.67],
+              }}
+              className="relative flex-1 flex  h-full w-full"
+            >
+              <motion.div className="h-full flex-1 bg-gradient-to-r from-primaryBackground to-black relative  w-20 pointer-events-auto" />
+              <BorderTrail size={250} delay={1} className="opacity-50" />
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function NavMenu() {
+  const middleIndex = Math.floor(tileAmount / 2);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  return (
+    <nav className="flex flex-row flex-nowrap justify-between items-center gap-5 fixed z-[99999999999] w-full">
+      <div className="">
+        <TextureButton variant="minimal" className=" pointer-events-auto">
+          About us
+        </TextureButton>
+        <TextureButton
+          variant="minimal"
+          onClick={() => {
+            setNewsletterDialog(true);
+          }}
+          className=" pointer-events-auto"
+        >
+          Newsletter
+        </TextureButton>
+
+        <TextureButton variant="accent" className=" pointer-events-auto">
+          Download
+        </TextureButton>
+        <AudioButton />
+      </div>
+
+      <NavMenuButton
         variants={{
           open: {
             y: 0,
@@ -109,9 +165,70 @@ export default function Preloader2() {
           duration: 1,
           ease: [0.78, 0.15, 0.84, 0.67],
         }}
-        className="absolute z-0 inset-0 bg-primaryBackground pointer-events-auto"
-      ></motion.div>
-    </motion.div>
+        set={setMenuOpen}
+      />
+    </nav>
+  );
+}
+
+function NavMenuButton({ set }) {
+  const container = useRef(null);
+  const screenSize = useScreenSize(); // { width, height }
+  const middleIndex = Math.floor(20 / 2);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offsets: ["start end", "start start"],
+  });
+  const distanceFromMiddle = Math.abs(-middleIndex);
+  const isActive = scrollYProgress.get() > 0.5;
+  const y = useTransform(
+    scrollYProgress,
+    [distanceFromMiddle, 1],
+    [screenSize.height, 0],
+    { clamp: true, ease: cubicBezier(0.31, 0.58, 0.48, 0.99) }
+  );
+  return (
+    <div
+      ref={container}
+      className="relative flex flex-row justify-between w-full  top-0 right-0 w-[100px] h-[40px] cursor-pointer rounded-[25px] overflow-hidden"
+    >
+      <motion.button
+        style={{ y }}
+        className="relative size-full pointer-events-auto"
+      >
+        <div
+          className="size-full bg-[#c9fd74]"
+          onClick={() => {
+            set((prev) => !prev);
+          }}
+        >
+          <PerspectiveText label="Menu" />
+        </div>
+        <motion.div
+          animate={{ top: isActive ? "-100%" : "0%" }}
+          transition={{
+            duration: 0.5,
+            type: "tween",
+            ease: [0.76, 0, 0.24, 1],
+          }}
+          onClick={() => {
+            toggleMenu();
+          }}
+        >
+          <PerspectiveText label="Close" />
+        </motion.div>
+      </motion.button>
+    </div>
+  );
+}
+
+function PerspectiveText({ label }) {
+  return (
+    <div className="flex flex-col justify-center items-center h-full w-full transform-style-preserve-3d transition-transform duration-[0.75s] cubic-bezier-[0.76,0,0.24,1]">
+      <p className="m-0 pointer-events-none uppercase">{label}</p>
+
+      <p className="m-0 pointer-events-none uppercase">{label}</p>
+    </div>
   );
 }
 

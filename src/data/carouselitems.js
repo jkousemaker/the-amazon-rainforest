@@ -2,22 +2,22 @@ export const items = [
   {
     id: 0,
     url: "/img/1.jpg",
-    title: "Animal 1",
+    title: "Cock-of-the-rock",
   },
   {
     id: 1,
     url: "/img/2.jpg",
-    title: "Animal 2",
+    title: "Cotinga",
   },
   {
     id: 2,
     url: "/img/3.jpg",
-    title: "Animal 3",
+    title: "Plate-billed mountain toucan",
   },
   {
     id: 3,
     url: "/img/4.jpg",
-    title: "Animal 4",
+    title: "Amazonian Royal Flycatcher",
   },
   {
     id: 4,
