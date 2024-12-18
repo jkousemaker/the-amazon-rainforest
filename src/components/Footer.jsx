@@ -8,7 +8,10 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
+import { useStore } from "@/store";
+import { cn } from "@/lib/cn";
 export default function Footer() {
+  const { intro } = useStore();
   const container = useRef();
   const { scrollYProgress } = useScroll({
     target: container,
@@ -19,7 +22,10 @@ export default function Footer() {
   return (
     <div
       ref={container}
-      className="relative h-[800px] bg-[#345001] text-white flex"
+      className={cn(
+        "relative h-[800px] bg-[#345001] text-white flex",
+        intro && "hidden"
+      )}
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <motion.div
