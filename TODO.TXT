@@ -1,4 +1,4 @@
-explore intro button - make it smaller
+//  explore intro button - make it smaller
 animate the logo in the beggining 
 //      check why we can scroll down in the first page of the website
 make a pretty menu 

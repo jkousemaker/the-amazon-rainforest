@@ -9,7 +9,7 @@ const CanvasButton = forwardRef(({ children, className, ...props }, ref) => {
   return (
     <motion.button
       className={cn(
-        "appearance-none  border-none cursor-pointer bg-white text-[#5e5e5e] rounded-3xl p-10 pl-[100px]  text-4xl tracking-[-2px] font-semibold leading-[40px] shadow-[0px_40px_80px_0px_rgba(0,_0,_0,_0.05),_inset_0px_-10px_20px_0px_rgba(0,_0,_0,_0.05),_0px_10px_20px_0px_rgba(0,_0,_0,_0.05)] h-20  text-center flex absolute bottom-0 left-0 items-center",
+        "appearance-none  border-none cursor-pointer bg-white text-[#5e5e5e] rounded-3xl p-6 pl-[60px]  text-4xl tracking-[-1px] font-semibold leading-[40px] shadow-[0px_40px_80px_0px_rgba(0,_0,_0,_0.05),_inset_0px_-10px_20px_0px_rgba(0,_0,_0,_0.05),_0px_10px_20px_0px_rgba(0,_0,_0,_0.05)] h-20  text-center flex absolute bottom-0 left-0 items-center",
         className
       )}
       initial={false}
@@ -22,7 +22,7 @@ const CanvasButton = forwardRef(({ children, className, ...props }, ref) => {
       {...props}
     >
       <motion.div
-        className="block  w-[600px] h-[300px] origin-[50_52%] z-[1] pointer-events-none absolute top-[-100px] left-[-240px]"
+        className="block  w-[600px] h-[300px] origin-[50_52%] z-[1] pointer-events-none absolute top-[-100px] left-[-270px]"
         variants={{
           open: { opacity: 0, transition: iconFadeTransition },
           hover: isOpen
