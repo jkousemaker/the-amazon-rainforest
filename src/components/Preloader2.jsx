@@ -38,7 +38,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import AudioPlayer from "react-h5-audio-player";
 import { BorderTrail } from "./core/border-trail";
 import useScreenSize from "@/hooks/useScreenSize";
-const tileAmount = 20;
+const tileAmount = 15;
 export default function Preloader2() {
   const [newsletterDialog, setNewsletterDialog] = useState(false);
   const { introLoaded, intro } = useStore();
@@ -93,7 +93,7 @@ export default function Preloader2() {
       <motion.div
         initial="open"
         animate={introLoaded ? "closed" : "open"}
-        transition={{ staggerChildren: 0.1 }}
+        transition={{ staggerChildren: 0.05 }}
         className="absolute z-0 inset-0   flex flex-row justify-center items-center til pointer-events-none"
       >
         {Array.from({ length: tileAmount }).map((_, i) => {
@@ -132,7 +132,7 @@ function Tile({}) {
       }}
       transition={{
         type: "tween",
-        duration: 1,
+        duration: 0.5,
         ease: [0.78, 0.15, 0.84, 0.67],
       }}
       className="relative flex-1 flex  h-full w-full"
@@ -142,13 +142,44 @@ function Tile({}) {
   );
 }
 
+const menuVariants = {
+  open: {
+    width: "480px",
+
+    height: "450px",
+
+    top: "-25px",
+
+    right: "-25px",
+
+    transition: { duration: 0.75, type: "tween", ease: [0.76, 0, 0.24, 1] },
+  },
+
+  closed: {
+    width: "100px",
+
+    height: "40px",
+
+    top: "0px",
+
+    right: "0px",
+
+    transition: {
+      duration: 0.75,
+      delay: 0.35,
+      type: "tween",
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
 function NavMenu() {
   const middleIndex = Math.floor(tileAmount / 2);
 
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <nav className="flex flex-row flex-nowrap justify-between items-center gap-5 fixed z-[99999999999] w-full">
-      <div className="">
+    <div className="flex flex-row flex-nowrap justify-between items-center gap-5 absolute z-[99999999999] right-[50px] top-[50px]">
+      {/* <div className="">
         <TextureButton variant="minimal" className=" pointer-events-auto">
           About us
         </TextureButton>
@@ -166,63 +197,170 @@ function NavMenu() {
           Download
         </TextureButton>
         <AudioButton />
-      </div>
-
-      <NavMenuButton
-        variants={{
-          open: {
-            y: 0,
-          },
-          closed: {
-            y: "-100%",
-          },
-        }}
-        transition={{
-          type: "tween",
-          duration: 1,
-          ease: [0.78, 0.15, 0.84, 0.67],
-        }}
-        set={setMenuOpen}
-      />
-    </nav>
-  );
-}
-
-function NavMenuButton({ set }) {
-  return (
-    <div className="relative flex flex-row justify-between w-full  top-0 right-0 h-[40px] cursor-pointer rounded-[25px] overflow-hidden">
-      <motion.button className="relative size-full pointer-events-auto">
-        <div
-          className="size-full bg-[#c9fd74]"
-          onClick={() => {
-            set((prev) => !prev);
-          }}
-        >
-          <PerspectiveText label="Menu" />
-        </div>
-        <motion.div
-          transition={{
-            duration: 0.5,
-            type: "tween",
-            ease: [0.76, 0, 0.24, 1],
-          }}
-          onClick={() => {
-            toggleMenu();
-          }}
-        >
-          <PerspectiveText label="Close" />
-        </motion.div>
-      </motion.button>
+      </div> */}
+      <motion.div
+        className="w-[480px] h-[650px] bg-[#c9fd74] rounded-[25px] relative pointer-events-auto"
+        variants={menuVariants}
+        animate={menuOpen ? "open" : "closed"}
+        initial="closed"
+      >
+        <AnimatePresence>{menuOpen && <Nav />}</AnimatePresence>
+      </motion.div>
+      <NavMenuButton isOpen={menuOpen} setOpen={() => setMenuOpen(!menuOpen)} />
     </div>
   );
 }
 
-function PerspectiveText({ label }) {
-  return (
-    <div className="flex flex-col justify-center items-center h-full w-full transform-style-preserve-3d transition-transform duration-[0.75s] cubic-bezier-[0.76,0,0.24,1]">
-      <p className="m-0 pointer-events-none uppercase">{label}</p>
+const perspectiveVariants = {
+  initial: {
+    opacity: 0,
 
-      <p className="m-0 pointer-events-none uppercase">{label}</p>
+    rotateX: 90,
+
+    translateY: 80,
+
+    translateX: -20,
+  },
+
+  enter: (i) => ({
+    opacity: 1,
+
+    rotateX: 0,
+
+    translateY: 0,
+
+    translateX: 0,
+
+    transition: {
+      duration: 0.65,
+
+      delay: 0.5 + i * 0.1,
+
+      ease: [0.215, 0.61, 0.355, 1],
+
+      //opacity: { duration: 0.35 },
+    },
+  }),
+
+  exit: {
+    opacity: 0,
+
+    transition: { duration: 0.5, type: "linear", ease: [0.76, 0, 0.24, 1] },
+  },
+};
+
+function Nav() {
+  return (
+    <div className="flex flex-col justify-between pt-[100px] pb-[50px] px-[40px] h-full box-border">
+      <div className="flex gap-2.5 flex-col">
+        <div className="[perspective:_120px] [perspective-origin:_bottom]">
+          <motion.div
+            custom={0}
+            variants={perspectiveVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            <p className="text-black text-[46px]">About us</p>
+          </motion.div>
+        </div>
+        <div className="[perspective:_120px] [perspective-origin:_bottom]">
+          <motion.div
+            custom={1}
+            variants={perspectiveVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            <p className="text-black text-[46px]">Newsletter</p>
+          </motion.div>
+        </div>
+        <div className="[perspective:_120px] [perspective-origin:_bottom]">
+          <motion.div
+            custom={2}
+            variants={perspectiveVariants}
+            initial="initial"
+            animate="enter"
+            exit="exit"
+          >
+            <p className="text-black text-[46px]">Download</p>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NavMenuButton({ isOpen, setOpen }) {
+  return (
+    <div className="absolute w-[100px] pointer-events-auto  top-0 right-0 h-[40px] cursor-pointer rounded-[25px] overflow-hidden">
+      <motion.div
+        className="relative size-full"
+        animate={{ top: isOpen ? "-100%" : "0%" }}
+        transition={{ duration: 0.5, type: "tween", ease: [0.76, 0, 0.24, 1] }}
+      >
+        <div
+          className="size-full bg-[#c9fd74] group "
+          onClick={() => {
+            setOpen();
+          }}
+        >
+          <PerspectiveText label="Menu" />
+        </div>
+
+        <div
+          className="size-full bg-black group "
+          onClick={() => {
+            setOpen();
+          }}
+        >
+          <PerspectiveText label="Close" color="#c9fd74" />
+        </div>
+      </motion.div>
+    </div>
+    // <div className="">
+    //   <motion.button className=" pointer-events-auto">
+    //     <div
+    //       className=""
+    //       onClick={() => {
+    //         setOpen((prev) => !prev);
+    //       }}
+    //     >
+    //       <PerspectiveText label="Menu" />
+    //     </div>
+    //     <motion.div
+    //       transition={{
+    //         duration: 0.5,
+    //         type: "tween",
+    //         ease: [0.76, 0, 0.24, 1],
+    //       }}
+    //       onClick={() => {
+    //         toggleMenu();
+    //       }}
+    //     >
+    //       <PerspectiveText label="Close" />
+    //     </motion.div>
+    //   </motion.button>
+    // </div>
+  );
+}
+
+function PerspectiveText({ label, color = "black" }) {
+  return (
+    <div className="flex flex-col justify-center items-center h-full w-full [transform-style:_preserve-3d] transition-transform duration-[0.75s] [transition-timing-function:_cubic-bezier(0.76,_0,_0.24,_1)]  group-hover:[transform:_rotateX(90deg)]">
+      <p
+        className="m-0 transition-all pointer-events-none duration-[0.75s] [transition-timing-function:_cubic-bezier(0.76,_0,_0.24,_1)]  uppercase group-hover:-translate-y-full group-hover:opacity-0"
+        style={{ color: color }}
+      >
+        {label}
+      </p>
+
+      <p
+        className="m-0 transition-all pointer-events-none duration-[0.75s] [transition-timing-function:_cubic-bezier(0.76,_0,_0.24,_1)] absolute origin-[bottom_center] [transform:_rotateX(-90deg)_translateY(9px)] opacity-0  uppercase group-hover:opacity-100"
+        style={{ color: color }}
+      >
+        {label}
+      </p>
     </div>
   );
 }

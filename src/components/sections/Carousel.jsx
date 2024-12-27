@@ -15,6 +15,7 @@ function Carousel() {
   const isInView = useInView(carousel, {
     amount: 0,
     margin: "-200px 0px -200px 0px",
+    once: true,
   });
   useEffect(() => {
     console.log(isInView);
@@ -31,7 +32,7 @@ function Carousel() {
         <motion.h1
           variants={{
             initial: { filter: "blur(4px)", opacity: 0 },
-            view: { filter: "blur(0px)", opacity: 1 },
+            view: { filter: "blur(0px)", opacity: 1, amount: 1 },
           }}
           initial="initial"
           whileInView="view"

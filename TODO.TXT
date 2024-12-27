@@ -1,7 +1,9 @@
 //  explore intro button - make it smaller
 animate the logo in the beggining 
 //      check why we can scroll down in the first page of the website
-make a pretty menu 
+//  make a pretty menu 
+Finish buttons in menu and optionally add footer
 finish cards and fix bugs bcs when we hover the letters are cut and make the cards appear in laptop 
 replace images
 change the colour of the download button
+Add audio
