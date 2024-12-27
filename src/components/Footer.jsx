@@ -19,6 +19,7 @@ export default function Footer() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [200, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.2, 1]);
+  const blur = useTransform(scrollYProgress, [0, 1], [50, 0]);
   return (
     <div
       ref={container}
@@ -29,7 +30,7 @@ export default function Footer() {
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <motion.div
-        style={{ y, scale }}
+        style={{ y, scale, filter: `blur(${blur}px)` }}
         className="relative h-[calc(100vh+800px)] -top-[100vh] w-full "
       >
         <div className="h-[800px] sticky top-[calc(100vh-800px)] w-full">

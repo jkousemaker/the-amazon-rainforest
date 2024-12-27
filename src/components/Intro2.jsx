@@ -16,7 +16,7 @@ import { cn } from "@/lib/cn";
 import CanvasButton from "./ui/CanvasButton";
 const MotionImage = motion.create(Image);
 import { introImages } from "@/data/introImages";
-
+import { Magnetic } from "../components/core/magnetic";
 function Row({ row, index, onImageLoad, hasLoaded }) {
   const mousePosition = useMousePosition();
   const screenSize = useScreenSize();
@@ -196,12 +196,14 @@ export default function Intro2() {
       </motion.div>
       {introLoaded && (
         <div className="absolute !z-[999909] grid place-items-center size-full">
-          <CanvasButton
-            className="relative bg-[#915A08] text-white uppercase"
-            onClick={() => setIntro(false)}
-          >
-            Explore
-          </CanvasButton>
+          <Magnetic range={200} actionArea="parent">
+            <CanvasButton
+              className="relative bg-[#915A08] text-white uppercase"
+              onClick={() => setIntro(false)}
+            >
+              Explore
+            </CanvasButton>
+          </Magnetic>
         </div>
       )}
     </>

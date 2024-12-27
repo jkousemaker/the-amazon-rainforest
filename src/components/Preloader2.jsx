@@ -38,6 +38,7 @@ import { Volume2, VolumeX } from "lucide-react";
 import AudioPlayer from "react-h5-audio-player";
 import { BorderTrail } from "./core/border-trail";
 import useScreenSize from "@/hooks/useScreenSize";
+import { Magnetic } from "./core/magnetic";
 const tileAmount = 15;
 export default function Preloader2() {
   const [newsletterDialog, setNewsletterDialog] = useState(false);
@@ -80,10 +81,12 @@ export default function Preloader2() {
                 y: "-100%",
               },
             }}
+            initial={{ scale: 0, y: "100%", x: "-100%", rotate: -80 }}
+            animate={{ scale: 1, y: 0, x: 0, rotate: 0 }}
             transition={{
               type: "tween",
               duration: 1,
-              ease: [0.78, 0.15, 0.84, 0.67],
+              ease: [0.06, 0.07, 0.02, 0.95],
             }}
           >
             <LogoContainer />
@@ -206,6 +209,7 @@ function NavMenu() {
       >
         <AnimatePresence>{menuOpen && <Nav />}</AnimatePresence>
       </motion.div>
+
       <NavMenuButton isOpen={menuOpen} setOpen={() => setMenuOpen(!menuOpen)} />
     </div>
   );

@@ -1,3 +1,4 @@
+import { Magnetic } from "../core/magnetic";
 import ShimmerButton from "../magicui/shimmer-button";
 
 export default function DownloadSection() {
@@ -6,7 +7,14 @@ export default function DownloadSection() {
       <h3 className="text-5xl font-light tracking-normal text-white">
         Explore our Interactive Experience
       </h3>
-      <ShimmerButton className="text-2xl px-20">Download</ShimmerButton>
+      <Magnetic range={200} actionArea="parent">
+        <ShimmerButton
+          className="text-2xl px-20 bg-[#915A08] text-white uppercase"
+          background="#915A08"
+        >
+          Download
+        </ShimmerButton>
+      </Magnetic>
     </section>
   );
 }
